@@ -2,7 +2,7 @@
 
 **An editorial atlas and statistical study of daily routines and work habits across history.**
 
-Horologium showcases reconstructed 24-hour schedules, work rituals, portraits, statistical patterns, and lessons drawn from **250 historical and modern figures**—spanning **Writers**, **Science & Medicine**, **Philosophers**, **Statesmen & Leaders**, and **Arts, Design & Music**.
+Horologium showcases reconstructed 24-hour schedules, work rituals, portraits, and statistical patterns drawn from **250 historical and modern figures**—spanning **Writers**, **Science & Medicine**, **Philosophers**, **Statesmen & Leaders**, and **Arts, Design & Music**.
 
 ## Features
 
@@ -11,7 +11,6 @@ Horologium showcases reconstructed 24-hour schedules, work rituals, portraits, s
 - **Personal Schedule Overlay** — Toggle your own wake, work, and sleep times directly onto the timeline to measure live Work Hours and Sleep overlap against any figure, and export your custom routine as an `.ics` file.
 - **Interactive Category Highlighting** — Click any activity swatch in the masthead (*Sleep*, *Work Hours*, *Exercise*, *Leisure*, *Meals*) to isolate that category across the entire archive.
 - **Comprehensive Statistics Panel** — 20 live analytical modules with an **Analytical Sample Scope** toggle (*All 250* or *Time-Anchored Only*) covering sleep and work-hour histograms, a 24-hour collective activity curve, Sleep vs. Work Hours correlation (`r`), wake-up and bedtime distributions, session architecture, wake-to-work lag, Work-to-Sleep ratios, a 24-hour focus & movement density heatmap, habit lift analysis, percentile benchmarks (`P10`–`P90`), discipline & era matrices, and clickable archive extremes.
-- **Lessons Panel** — Eight principles on focus, sleep, movement, chronotypes, rituals, and recovery distilled from the dataset, with live metrics, actionable rules, and clickable exemplars.
 - **Detail Drawer, Portraits & Primary Citations** — Inspect any figure's portrait, hourly breakdown, work-ethic quote, historical context, primary source, and explicit estimation disclosure, with keyboard navigation (`←` / `→`) and URL hash deep-linking.
 - **Calendar Export (`.ics`) & Bookmarks** — Generate and download RFC 5545 `.ics` calendar files for Google Calendar or Apple Calendar, and star favorite routines locally in the browser.
 

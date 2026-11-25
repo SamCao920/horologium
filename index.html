@@ -105,7 +105,6 @@
         <nav class="flex items-center gap-1" aria-label="Primary views">
           <button type="button" id="nav-atlas-btn" data-switch-view="atlas" class="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors">Atlas</button>
           <button type="button" id="nav-stats-btn" data-switch-view="stats" class="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors">Statistics</button>
-          <button type="button" id="nav-lessons-btn" data-switch-view="lessons" class="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors">Lessons</button>
         </nav>
       </div>
 
@@ -160,7 +159,6 @@
         <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-catWork">Patterns in This Sample &nbsp;/&nbsp; Time-Anchored Subset (n = 144, non-random historical sample)</span>
         <div class="flex items-center gap-4 font-mono text-[11px]">
           <button type="button" data-switch-view="stats" class="text-ink hover:text-catWork underline decoration-rule hover:decoration-catWork transition-colors">Full Statistics &rarr;</button>
-          <button type="button" data-switch-view="lessons" class="text-ink hover:text-catWork underline decoration-rule hover:decoration-catWork transition-colors">Read Lessons &rarr;</button>
         </div>
       </div>
       <div id="homepage-findings-grid" class="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule border border-rule"></div>
@@ -731,63 +729,8 @@
 
       <!-- Row 12: Notable Extremes / Records (Clickable to open Detail Drawer) -->
       <section class="space-y-3">
-        <div class="flex items-center justify-between gap-2">
-          <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">20 / Archive Extremes (Click any record to inspect)</span>
-          <button type="button" data-switch-view="lessons" class="font-mono text-[11px] uppercase tracking-[0.12em] text-catWork hover:underline">
-            Read Data-Backed Lessons &rarr;
-          </button>
-        </div>
+        <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">20 / Archive Extremes (Click any record to inspect)</div>
         <div id="stats-extremes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-rule border border-rule"></div>
-      </section>
-    </div>
-
-    <!-- THIRD PANEL: LESSONS LEARNED FROM THE DATA -->
-    <div id="lessons-view" class="hidden space-y-12 sm:space-y-14">
-      <!-- Lessons Hero -->
-      <section class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-ink">
-        <div class="max-w-2xl space-y-3">
-          <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-catWork">
-            Synthesis &nbsp;/&nbsp; Distilled From <span id="lessons-sample-n">250</span> Reconstructed Lives
-          </p>
-          <h1 class="font-editorial text-4xl sm:text-5xl font-light tracking-[-0.03em] leading-[1.04] text-ink">
-            Eight lessons on <em class="italic font-normal">focus, rest,</em> and sustainable craft.
-          </h1>
-          <p class="text-sm sm:text-[15px] text-muted leading-relaxed">
-            Every principle below is grounded directly in the statistical distributions of the Horologium archive—not productivity folklore. Click any cited figure to inspect their exact 24-hour routine.
-          </p>
-        </div>
-        <div class="flex items-center gap-2 self-start md:self-end">
-          <button type="button" data-switch-view="stats" class="font-mono text-[11px] uppercase tracking-[0.12em] px-3.5 py-2 border border-rule bg-pure text-ink hover:border-ink transition-colors">
-            View Raw Stats
-          </button>
-          <button type="button" data-switch-view="atlas" class="font-mono text-[11px] uppercase tracking-[0.12em] px-3.5 py-2 border border-ink bg-ink text-paper hover:bg-catWork hover:border-catWork transition-colors">
-            Explore Atlas
-          </button>
-        </div>
-      </section>
-
-      <!-- Live Synthesis Headline Strip -->
-      <section id="lessons-headline-strip" class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-rule border border-rule"></section>
-
-      <!-- 8 Data-Backed Lessons Editorial Grid -->
-      <section id="lessons-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 border-t border-l border-rule bg-paper"></section>
-
-      <!-- Interactive Callout: Apply the Lessons -->
-      <section class="bg-pure border border-ink p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div class="max-w-xl space-y-2">
-          <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-catWork">Put the Data Into Practice</div>
-          <h2 class="font-editorial text-2xl sm:text-3xl font-normal text-ink">Test your own day against the archive.</h2>
-          <p class="text-sm text-muted leading-relaxed">
-            Open the 24-Hour Comparison Studio with your personal schedule overlay enabled to compare your sleep window, wake-to-work latency, and deep-work hours directly against any three figures.
-          </p>
-        </div>
-        <button
-          type="button"
-          id="lessons-try-overlay-btn"
-          class="shrink-0 font-mono text-xs uppercase tracking-[0.14em] px-5 py-3 bg-ink text-paper hover:bg-catWork transition-colors"
-        >
-          Overlay My Schedule &rarr;
-        </button>
       </section>
     </div>
   </main>
@@ -2037,33 +1980,27 @@
     const statsCharts = {};
 
     function switchView(view) {
-      state.activeView = (view === 'stats' || view === 'lessons') ? view : 'atlas';
+      state.activeView = view === 'stats' ? 'stats' : 'atlas';
       const atlasEl = document.getElementById('atlas-view');
       const statsEl = document.getElementById('stats-view');
-      const lessonsEl = document.getElementById('lessons-view');
       const activeCls = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors';
       const idleCls = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors';
 
       atlasEl.classList.toggle('hidden', state.activeView !== 'atlas');
       statsEl.classList.toggle('hidden', state.activeView !== 'stats');
-      lessonsEl.classList.toggle('hidden', state.activeView !== 'lessons');
 
       document.getElementById('nav-atlas-btn').className = state.activeView === 'atlas' ? activeCls : idleCls;
       document.getElementById('nav-stats-btn').className = state.activeView === 'stats' ? activeCls : idleCls;
-      document.getElementById('nav-lessons-btn').className = state.activeView === 'lessons' ? activeCls : idleCls;
 
       if (state.activeView === 'atlas') {
         try {
-          if (window.location.hash === '#stats' || window.location.hash === '#lessons') {
+          if (window.location.hash === '#stats') {
             history.replaceState(null, '', window.location.pathname + window.location.search);
           }
         } catch (_) {}
       } else if (state.activeView === 'stats') {
         try { history.replaceState(null, '', '#stats'); } catch (_) {}
         renderStatisticsView();
-      } else if (state.activeView === 'lessons') {
-        try { history.replaceState(null, '', '#lessons'); } catch (_) {}
-        renderLessonsView();
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -3069,152 +3006,6 @@
       `;
     }
 
-    // =========================================================================
-    // THIRD PANEL: DATA-DRIVEN LESSONS VIEW
-    // =========================================================================
-    function renderLessonsView() {
-      const N = FIGURES.length;
-      document.getElementById('lessons-sample-n').textContent = String(N);
-      const pf = FIGURES.map(analyzeFigureMetrics);
-
-      const sleepSt = calcStats(pf.map(x => x.sleep));
-      const workSt = calcStats(pf.map(x => x.work));
-      const leisureSt = calcStats(pf.map(x => x.leisure));
-      const sprintSt = calcStats(pf.filter(x => x.longestSprint > 0).map(x => x.longestSprint));
-      const sleep7PlusPct = Math.round((pf.filter(x => x.sleep >= 7).length / N) * 100);
-      const sweetSpotWorkPct = Math.round((pf.filter(x => x.work >= 4 && x.work <= 9).length / N) * 100);
-      const splitBlocksPct = Math.round((pf.filter(x => x.workBlockCount >= 2).length / N) * 100);
-      const nonAth = pf.filter(x => x.profession !== 'Athletes');
-      const nonAthMovePct = Math.round((nonAth.filter(x => x.exercise > 0).length / (nonAth.length || 1)) * 100);
-      const before10WorkPct = Math.round((pf.filter(x => x.firstWork !== null && x.firstWork <= 10).length / N) * 100);
-      const medLatency = calcStats(pf.filter(x => x.wakeToWork !== null && x.wakeToWork <= 12).map(x => x.wakeToWork)).median;
-
-      const avgByChrono = ch => {
-        const sub = pf.filter(x => x.chronotype === ch);
-        return sub.length ? (sub.reduce((a, b) => a + b.work, 0) / sub.length).toFixed(1) : '0.0';
-      };
-      const strictPct = Math.round((pf.filter(x => x.habits.includes('Strict Schedule')).length / N) * 100);
-
-      // Headline synthesis KPI strip
-      document.getElementById('lessons-headline-strip').innerHTML = [
-        { k: 'Sleep >= 7 Hours', v: `${sleep7PlusPct}%`, sub: `Median ${sleepSt.median.toFixed(1)}h across all ${N}` },
-        { k: 'Work 4–9 Hours/Day', v: `${sweetSpotWorkPct}%`, sub: `Median ${workSt.median.toFixed(1)}h deep work` },
-        { k: 'Split Work Blocks', v: `${splitBlocksPct}%`, sub: `Avg longest sprint ${sprintSt.mean.toFixed(1)}h` },
-        { k: 'Non-Athletes Who Move', v: `${nonAthMovePct}%`, sub: 'Daily walks or training' },
-      ].map(item => `
-        <div class="bg-pure p-5">
-          <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">${item.k}</div>
-          <div class="font-editorial text-3xl sm:text-4xl text-ink mt-1.5">${item.v}</div>
-          <div class="font-mono text-[10px] text-muted mt-1">${item.sub}</div>
-        </div>
-      `).join('');
-
-      const lessons = [
-        {
-          num: '01',
-          tag: 'Sustainable Output',
-          stat: `${sweetSpotWorkPct}% work 4–9 hrs · Median ${workSt.median.toFixed(1)}h`,
-          title: 'Depth beats marathon hours.',
-          body: `Across all ${N} figures, extreme 14-hour workdays are the exception, not the rule. The overwhelming majority produce their enduring work inside a 4-to-9-hour window—and many of the most prolific writers and scientists (Darwin, Woolf, Poincaré, Cather) stopped cleanly after 3 to 5 hours of peak cognitive heat.`,
-          takeaway: 'Guard 4 hours of uninterrupted, high-intensity focus before chasing longer office hours.',
-          exemplars: ['charles-darwin', 'virginia-woolf', 'henri-poincare'],
-        },
-        {
-          num: '02',
-          tag: 'Recovery First',
-          stat: `${sleep7PlusPct}% sleep >= 7 hrs · Median ${sleepSt.median.toFixed(1)}h`,
-          title: 'Sleep is infrastructure, not wasted time.',
-          body: `Despite popular myths of sleepless geniuses, ${sleep7PlusPct}% of the archive sleeps at least 7 hours a day (median ${sleepSt.median.toFixed(1)} hours). Thinkers across eras—from Kant's ironclad 10 PM bedtime to Einstein's 10 hours, Descartes's late mornings, and Thomas Mann's sacred afternoon nap—treated sleep as the foundation of judgment.`,
-          takeaway: 'Protect a fixed bedtime first; build your work blocks backward from full recovery.',
-          exemplars: ['albert-einstein', 'immanuel-kant', 'thomas-mann'],
-        },
-        {
-          num: '03',
-          tag: 'The Golden Window',
-          stat: `${before10WorkPct}% start deep work by 10 AM · ${medLatency.toFixed(1)}h median lag`,
-          title: 'Begin your hardest work before the world interrupts.',
-          body: `${before10WorkPct}% of documented figures launch their primary work session by 10:00 AM, with a median lag of just ${medLatency.toFixed(1)} hours after waking. Starting before meetings, mail, or domestic obligations arrive turns morning quiet into a structural advantage.`,
-          takeaway: 'Place your single most demanding creative or analytical task in your first 90 minutes of work.',
-          exemplars: ['maya-angelou', 'haruki-murakami', 'anthony-trollope'],
-        },
-        {
-          num: '04',
-          tag: 'Rhythmic Segmentation',
-          stat: `${splitBlocksPct}% use 2+ work blocks · ${sprintSt.mean.toFixed(1)}h avg sprint`,
-          title: 'Split the day into deliberate bursts.',
-          body: `Rather than grinding straight through from morning to evening, ${splitBlocksPct}% of figures divide Deep Work into two or more distinct blocks separated by meals, walks, or naps. The average longest unbroken sprint is ${sprintSt.mean.toFixed(1)} hours—long enough for deep immersion, short enough to prevent diminishing returns.`,
-          takeaway: 'Structure work into 2 focused blocks separated by a real physical or mental reset.',
-          exemplars: ['simone-de-beauvoir', 'roald-dahl', 'benjamin-franklin'],
-        },
-        {
-          num: '05',
-          tag: 'Embodied Cognition',
-          stat: `${nonAthMovePct}% of non-athletes walk or train daily`,
-          title: 'Walking is part of the work, not a break from it.',
-          body: `Even excluding professional athletes, ${nonAthMovePct}% of writers, scientists, philosophers, and composers embed daily physical movement into their schedule—most commonly a 1-to-3-hour afternoon walk. Darwin's Sandwalk, Dickens's 10-mile London walks, Beethoven's forest sketchbooks, and Nietzsche's alpine trails were active problem-solving engines.`,
-          takeaway: 'Schedule a phone-free afternoon walk to unlock ideas your desk cannot solve.',
-          exemplars: ['charles-dickens', 'friedrich-nietzsche', 'ludwig-van-beethoven'],
-        },
-        {
-          num: '06',
-          tag: 'Chronotype Alignment',
-          stat: `Early Birds ${avgByChrono('Early Bird')}h · Night Owls ${avgByChrono('Night Owl')}h · Biphasic ${avgByChrono('Biphasic Sleeper')}h`,
-          title: 'Consistency matters far more than waking at 5 AM.',
-          body: `Early Birds dominate the archive in headcount, yet Night Owls (${avgByChrono('Night Owl')}h avg work) and Biphasic Sleepers (${avgByChrono('Biphasic Sleeper')}h avg work) match or surpass Early Birds (${avgByChrono('Early Bird')}h) in daily output. What unites them is not the clock hour—it is defending the exact same quiet hours every single day.`,
-          takeaway: 'Stop fighting your biology; pick the 4–6 quietest hours for your chronotype and defend them daily.',
-          exemplars: ['marcel-proust', 'winston-churchill', 'honore-de-balzac'],
-        },
-        {
-          num: '07',
-          tag: 'Zero Friction',
-          stat: `${strictPct}% follow a Strict Schedule ritual`,
-          title: 'Use external rituals to bypass willpower.',
-          body: `${strictPct}% of the archive relies on strict, repeatable external cues—Maya Angelou's bare hotel room, Twyla Tharp's 5:30 AM cab, Beethoven's 60 counted coffee beans, or Raymond Chandler's "write or do nothing" desk rule. When starting becomes automatic, inspiration is no longer required.`,
-          takeaway: 'Attach the start of deep work to one small, physical cue (same desk, drink, or time) every day.',
-          exemplars: ['twyla-tharp', 'wh-auden', 'raymond-chandler'],
-        },
-        {
-          num: '08',
-          tag: 'Subconscious Incubation',
-          stat: `Mean ${leisureSt.mean.toFixed(1)}h daily leisure & evening wind-down`,
-          title: 'Stop cleanly so your mind can incubate overnight.',
-          body: `Across 250 lives, intentional leisure averages ${leisureSt.mean.toFixed(1)} hours per day—music, reading, backgammon, painting, or family dinners. Figures like Poincaré, Marshall, and Einstein deliberately refused to work after dinner, letting their unconscious mind solve problems overnight.`,
-          takeaway: 'Set a hard shutdown time each evening and replace work with analog, restorative leisure.',
-          exemplars: ['george-c-marshall', 'carl-jung', 'thomas-mann'],
-        },
-      ];
-
-      document.getElementById('lessons-cards-grid').innerHTML = lessons.map(l => {
-        const chips = l.exemplars
-          .map(id => FIGURES.find(f => f.id === id))
-          .filter(Boolean)
-          .map(f => `<button type="button" data-open-detail="${escapeHtml(f.id)}" class="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-rule bg-pure hover:border-ink hover:text-catWork transition-colors">${escapeHtml(f.name)} &rarr;</button>`)
-          .join('');
-        return `
-          <article class="border-r border-b border-rule bg-paper hover:bg-pure p-6 sm:p-8 flex flex-col justify-between gap-5 transition-colors">
-            <div class="space-y-3.5">
-              <div class="flex flex-wrap items-center justify-between gap-2">
-                <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">${l.num} / ${escapeHtml(l.tag)}</span>
-                <span class="font-mono text-[10px] px-2 py-0.5 border border-catWork/40 text-catWork bg-catWork/5">${escapeHtml(l.stat)}</span>
-              </div>
-              <h2 class="font-editorial text-2xl sm:text-3xl font-normal tracking-[-0.02em] text-ink leading-tight">${escapeHtml(l.title)}</h2>
-              <p class="text-sm text-muted leading-relaxed">${escapeHtml(l.body)}</p>
-            </div>
-            <div class="space-y-3.5 pt-4 border-t border-rule/80">
-              <div class="pl-3.5 border-l-2 border-ink text-xs text-ink leading-relaxed">
-                <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-subtle block mb-0.5">Actionable Rule</span>
-                ${escapeHtml(l.takeaway)}
-              </div>
-              <div class="flex flex-wrap items-center gap-1.5">
-                <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-subtle mr-1">Exemplars</span>
-                ${chips}
-              </div>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
     function initStats() {
       document.getElementById('stat-total-figures').textContent = String(FIGURES.length);
       document.getElementById('stat-kpi-count').textContent = String(FIGURES.length);
@@ -3380,11 +3171,6 @@
       avgBar.addEventListener('mouseover', inspectAvg);
       avgBar.addEventListener('click', inspectAvg);
 
-      document.getElementById('lessons-try-overlay-btn').addEventListener('click', () => {
-        state.userOverlayEnabled = true;
-        switchView('atlas');
-        renderComparison();
-      });
       document.getElementById('back-to-top-btn').addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
@@ -3555,8 +3341,6 @@
     }, 60000);
     if (window.location.hash === '#stats') {
       switchView('stats');
-    } else if (window.location.hash === '#lessons') {
-      switchView('lessons');
     } else if (window.location.hash && window.location.hash.startsWith('#figure=')) {
       const targetId = decodeURIComponent(window.location.hash.slice(8));
       if (FIGURES.some(f => f.id === targetId)) openDetailDrawer(targetId);
