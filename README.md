@@ -4,14 +4,6 @@
 
 Horologium showcases reconstructed 24-hour schedules, work rituals, portraits, statistical patterns, and lessons drawn from **250 historical and modern figures**—spanning **Writers**, **Science & Medicine**, **Philosophers**, **Statesmen & Leaders**, and **Arts, Design & Music**.
 
-## Patterns in This Sample (Time-Anchored Subset, n = 144)
-
-*Note: Published historical schedules are a non-random sample skewed toward notable routines; medians and ranges are reported alongside means.*
-
-- **Writers vs. Scientists:** In this sample, time-anchored Writers log shorter daily work blocks than Scientists—likely reflecting solo drafting hours versus broader laboratory and teaching hours—despite similar ~8-hour sleep.
-- **Early Birds vs. Night Owls:** Night Owls in the time-anchored subset record higher median work hours than Early Birds, though eccentric outliers skew the upper tail.
-- **Walking & Movement:** Philosophers in this sample record the highest median daily walking time, driven heavily by documented walkers like Kant, Nietzsche, and Thoreau.
-
 ## Features
 
 - **Atlas & Filterable Directory** — Search and filter all 250 profiles by discipline, chronotype (*Early Bird*, *Night Owl*, *Biphasic Sleeper*), daily habits, and **Source Fidelity** (*Time-Anchored* vs. *Biographical Sketch*), or press `/` to jump straight to search.
@@ -31,6 +23,6 @@ Horologium builds on the foundational archival work of Mason Currey's *Daily Rit
 
 Built as a single self-contained static site using HTML, Tailwind CSS, Chart.js, and vanilla JavaScript.
 
-## License & Author
+## License
 
-Built by [Fangyuan Cao](https://fangyuancao.me) in November 2026. Open source under the MIT License.
+Open source under the MIT License.
