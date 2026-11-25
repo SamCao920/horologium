@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HOROLOGIUM</title>
+  <title>HOROLOGIUM — Minimalist Atlas of Daily Routines</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23F8F6F1' stroke-width='2.5'/%3E%3Cpath d='M32 10 A22 22 0 0 1 54 32' fill='none' stroke='%23C83E2B' stroke-width='5'/%3E%3Cpath d='M10 32 A22 22 0 0 1 32 10' fill='none' stroke='%2318283E' stroke-width='5'/%3E%3Cline x1='32' y1='32' x2='32' y2='16' stroke='%23F8F6F1' stroke-width='2.5' stroke-linecap='square'/%3E%3Cline x1='32' y1='32' x2='44' y2='32' stroke='%23C83E2B' stroke-width='2.5' stroke-linecap='square'/%3E%3Ccircle cx='32' cy='32' r='2.8' fill='%23F8F6F1'/%3E%3C/svg%3E" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -437,6 +437,68 @@
           <button type="button" data-stats-scope="all" class="stats-scope-btn font-mono text-[11px] uppercase tracking-[0.1em] px-3 py-1.5 border border-ink bg-ink text-paper transition-colors">All 250</button>
           <button type="button" data-stats-scope="clocked" class="stats-scope-btn font-mono text-[11px] uppercase tracking-[0.1em] px-3 py-1.5 border border-rule bg-paper text-ink hover:border-ink transition-colors">Time-Anchored Only (n=144)</button>
         </div>
+      </section>
+
+      <!-- 00 / AVERAGE DAILY SCHEDULE (FOR EVERYONE OR ANY SUBGROUP) -->
+      <section class="bg-pure border border-ink p-5 sm:p-6 space-y-5">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-4 border-b border-rule">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-catWork">00 / Composite Day</span>
+              <span id="avg-sched-n" class="font-mono text-[10px] px-2 py-0.5 border border-rule text-muted">n = 250</span>
+            </div>
+            <h2 class="font-editorial text-2xl sm:text-3xl font-normal text-ink mt-1">Average Daily Schedule</h2>
+            <p class="text-xs text-muted mt-0.5">Modal (most common) activity across each 30-minute slot for everyone or any chosen subgroup.</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <label for="avg-subgroup-select" class="font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">Subgroup</label>
+            <select id="avg-subgroup-select" class="text-xs font-mono bg-paper border border-ink px-3 py-2 text-ink focus:outline-none">
+              <option value="all">Everyone (Active Scope)</option>
+              <optgroup label="By Discipline">
+                <option value="prof:Writers">Writers</option>
+                <option value="prof:Science & Medicine">Science &amp; Medicine</option>
+                <option value="prof:Philosophers">Philosophers</option>
+                <option value="prof:Statesmen & Leaders">Statesmen &amp; Leaders</option>
+                <option value="prof:Arts, Design & Music">Arts, Design &amp; Music</option>
+              </optgroup>
+              <optgroup label="By Chronotype">
+                <option value="chrono:Early Bird">Early Birds</option>
+                <option value="chrono:Night Owl">Night Owls</option>
+                <option value="chrono:Biphasic Sleeper">Biphasic Sleepers</option>
+              </optgroup>
+              <optgroup label="By Era">
+                <option value="era:Renaissance & Enlightenment">Renaissance &amp; Enlightenment</option>
+                <option value="era:19th Century">19th Century</option>
+                <option value="era:Early–Mid 20th Century">Early–Mid 20th Century</option>
+                <option value="era:Contemporary">Contemporary</option>
+              </optgroup>
+              <optgroup label="By Habit">
+                <option value="habit:Daily Walker">Daily Walkers</option>
+                <option value="habit:Napper">Nappers</option>
+                <option value="habit:Coffee Drinker">Coffee Drinkers</option>
+                <option value="habit:Night Writer">Night Writers</option>
+              </optgroup>
+            </select>
+            <button type="button" id="export-avg-ics-btn" class="font-mono text-[10px] uppercase tracking-[0.12em] px-3 py-2 bg-ink text-paper hover:bg-catWork transition-colors">
+              Export .ICS
+            </button>
+          </div>
+        </div>
+
+        <!-- Synchronized 24-Hour Consensus Bar -->
+        <div class="space-y-2">
+          <div class="flex justify-between font-mono text-[10px] text-subtle select-none">
+            <span>00</span><span>03</span><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span>
+          </div>
+          <div id="avg-sched-bar" class="relative h-12 bg-paperAlt flex overflow-hidden border border-rule"></div>
+          <div id="avg-sched-inspector" class="px-3 py-2 bg-paper border border-rule font-mono text-[11px] text-muted">
+            Hover or click any block above to see what percentage of this subgroup is active during that window.
+          </div>
+        </div>
+
+        <!-- Subgroup Typical Cadence Metrics -->
+        <div id="avg-sched-metrics" class="grid grid-cols-2 sm:grid-cols-5 gap-px bg-rule border border-rule"></div>
       </section>
 
       <!-- Headline Repeatable Finding + Methodology Disclosure -->
@@ -880,6 +942,7 @@
       activeDetailId: null,
       activeView: 'atlas',
       statsScope: 'all',
+      avgSubgroup: 'all',
     };
 
     function loadPersistedState() {
@@ -2104,6 +2167,157 @@
       }
     }
 
+    function getAverageSubgroupFigures(scoped) {
+      const sel = state.avgSubgroup || 'all';
+      if (sel === 'all') return { label: 'Everyone', list: scoped };
+      const [kind, val] = sel.split(':');
+      if (kind === 'prof') return { label: val, list: scoped.filter(f => f.profession === val) };
+      if (kind === 'chrono') return { label: val + 's', list: scoped.filter(f => f.chronotype === val) };
+      if (kind === 'era') return { label: val, list: scoped.filter(f => f.era === val) };
+      if (kind === 'habit') return { label: val + 's', list: scoped.filter(f => f.habits.includes(val)) };
+      return { label: 'Everyone', list: scoped };
+    }
+
+    function buildCompositeSchedule(list) {
+      if (!list.length) return [];
+      const cats = ['Sleep', 'Deep Work', 'Exercise', 'Leisure', 'Meals'];
+      const slots = [];
+      for (let i = 0; i < 48; i++) {
+        const probe = i * 0.5 + 0.25;
+        const counts = { 'Sleep': 0, 'Deep Work': 0, 'Exercise': 0, 'Leisure': 0, 'Meals': 0 };
+        for (const f of list) {
+          const blk = f.schedule.find(b => b.start <= probe && b.end > probe);
+          if (blk) counts[blk.category]++;
+        }
+        let bestCat = 'Leisure', bestCnt = -1;
+        for (const c of cats) {
+          if (counts[c] > bestCnt) { bestCnt = counts[c]; bestCat = c; }
+        }
+        slots.push({ cat: bestCat, pct: Math.round((bestCnt / list.length) * 100), counts });
+      }
+      // Collapse contiguous slots with same modal category
+      const blocks = [];
+      let curCat = slots[0].cat;
+      let curStart = 0;
+      let pctSum = slots[0].pct;
+      let slotCnt = 1;
+      for (let i = 1; i <= 48; i++) {
+        if (i === 48 || slots[i].cat !== curCat) {
+          const avgPct = Math.round(pctSum / slotCnt);
+          const dispCat = curCat === 'Deep Work' ? 'Work Hours' : curCat;
+          blocks.push({
+            start: curStart * 0.5,
+            end: i * 0.5,
+            category: curCat,
+            pct: avgPct,
+            title: `Modal ${dispCat}`,
+            detail: `${avgPct}% of this subgroup is typically in ${dispCat} during this window.`,
+          });
+          if (i < 48) {
+            curCat = slots[i].cat;
+            curStart = i;
+            pctSum = slots[i].pct;
+            slotCnt = 1;
+          }
+        } else {
+          pctSum += slots[i].pct;
+          slotCnt++;
+        }
+      }
+      return blocks;
+    }
+
+    let lastCompositeBlocks = [];
+    let lastCompositeLabel = 'Everyone';
+
+    function renderAverageSchedule(scoped) {
+      const { label, list } = getAverageSubgroupFigures(scoped);
+      lastCompositeLabel = label;
+      const nEl = document.getElementById('avg-sched-n');
+      const barEl = document.getElementById('avg-sched-bar');
+      const metricsEl = document.getElementById('avg-sched-metrics');
+      const inspEl = document.getElementById('avg-sched-inspector');
+      if (!nEl || !barEl || !metricsEl) return;
+
+      nEl.textContent = `n = ${list.length}`;
+      if (!list.length) {
+        lastCompositeBlocks = [];
+        barEl.innerHTML = `<div class="w-full h-full flex items-center justify-center font-mono text-xs text-muted">No figures in this subgroup under the current scope.</div>`;
+        metricsEl.innerHTML = '';
+        return;
+      }
+
+      const blocks = buildCompositeSchedule(list);
+      lastCompositeBlocks = blocks;
+
+      barEl.innerHTML = blocks.map((b, idx) => {
+        const w = ((b.end - b.start) / 24) * 100;
+        const color = CATEGORY_META[b.category].color;
+        const disp = b.category === 'Deep Work' ? 'Work' : b.category;
+        const showLabel = w >= 10;
+        return `
+          <button
+            type="button"
+            data-avg-idx="${idx}"
+            class="timeline-segment relative h-full border-r border-pure/45 last:border-r-0 flex flex-col items-center justify-center overflow-hidden cursor-pointer"
+            style="width:${w}%; background:${color};"
+            title="${escapeHtml(formatRange(b.start, b.end))} · ${escapeHtml(disp)} (${b.pct}%)"
+          >
+            ${showLabel ? `<span class="font-mono text-[9px] uppercase tracking-[0.08em] text-white/95 truncate px-1 pointer-events-none">${escapeHtml(disp)}</span>` : ''}
+            ${w >= 14 ? `<span class="font-mono text-[8px] text-white/75 pointer-events-none">${b.pct}%</span>` : ''}
+          </button>
+        `;
+      }).join('') + `<div class="pointer-events-none absolute inset-0 grid grid-cols-8">${Array(8).fill('<div class="border-r border-white/20 last:border-r-0"></div>').join('')}</div>`;
+
+      const metrics = list.map(analyzeFigureMetrics);
+      const medWake = calcStats(metrics.map(m => m.wake)).median;
+      const medBed = calcStats(metrics.map(m => m.bedtime)).median;
+      const meanWork = calcStats(metrics.map(m => m.work)).mean;
+      const meanSleep = calcStats(metrics.map(m => m.sleep)).mean;
+      const meanEx = calcStats(metrics.map(m => m.exercise)).mean;
+
+      metricsEl.innerHTML = [
+        { k: 'Median Wake', v: formatHour(medWake), cls: 'text-ink' },
+        { k: 'Median Bedtime', v: formatHour(medBed), cls: 'text-catSleep' },
+        { k: 'Mean Work Hrs', v: `${meanWork.toFixed(1)}h`, cls: 'text-catWork' },
+        { k: 'Mean Sleep', v: `${meanSleep.toFixed(1)}h`, cls: 'text-catSleep' },
+        { k: 'Mean Exercise', v: `${meanEx.toFixed(1)}h`, cls: 'text-catExercise' },
+      ].map(m => `
+        <div class="bg-paper p-3.5">
+          <div class="font-mono text-[9px] uppercase tracking-[0.14em] text-subtle">${m.k}</div>
+          <div class="font-editorial text-xl sm:text-2xl ${m.cls} mt-1">${m.v}</div>
+        </div>
+      `).join('');
+
+      if (inspEl) {
+        inspEl.textContent = `Showing composite modal schedule for ${label} (n=${list.length}). Hover or click any block above to inspect.`;
+      }
+    }
+
+    function downloadCompositeICS() {
+      if (!lastCompositeBlocks.length) return;
+      const slug = lastCompositeLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const obj = {
+        id: `average-${slug}`,
+        name: `Average ${lastCompositeLabel}`,
+        profession: 'Composite Schedule',
+        era: 'Horologium Archive',
+        source: { citation: `Horologium Modal Average (${lastCompositeLabel})`, url: null },
+        schedule: lastCompositeBlocks,
+      };
+      const icsContent = generateICS(obj);
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `average-${slug}-routine.ics`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast(`Exported average-${slug}-routine.ics`);
+    }
+
     function getScopedFigures() {
       if (state.statsScope === 'clocked') {
         return FIGURES.filter(f => f.verificationTier === 'Time-Anchored');
@@ -2130,6 +2344,7 @@
         btn.classList.toggle('border-rule', !active);
       });
 
+      renderAverageSchedule(scoped);
       const perFigure = scoped.map(analyzeFigureMetrics);
 
       // Compute live headline finding on current scope
@@ -2815,9 +3030,10 @@
         </table>
       `;
 
-      // 19. Time-Anchored vs Biographical Sensitivity Check
+      // 19. Time-Anchored vs Biographical Sensitivity Check (always computed on full archive so both tiers compare cleanly)
+      const allMetrics = FIGURES.map(analyzeFigureMetrics);
       const tiers = ['Time-Anchored', 'Biographical Sketch'].map(tier => {
-        const sub = perFigure.filter(x => x.verificationTier === tier);
+        const sub = allMetrics.filter(x => x.verificationTier === tier);
         const n = sub.length || 1;
         return {
           tier,
@@ -3145,6 +3361,25 @@
         renderFilters();
         renderDirectory();
       });
+      document.getElementById('avg-subgroup-select').addEventListener('change', e => {
+        state.avgSubgroup = e.target.value;
+        renderAverageSchedule(getScopedFigures());
+      });
+      document.getElementById('export-avg-ics-btn').addEventListener('click', downloadCompositeICS);
+      const avgBar = document.getElementById('avg-sched-bar');
+      const inspectAvg = e => {
+        const btn = e.target.closest('[data-avg-idx]');
+        if (!btn) return;
+        const blk = lastCompositeBlocks[Number(btn.dataset.avgIdx)];
+        if (!blk) return;
+        const disp = blk.category === 'Deep Work' ? 'Work Hours' : blk.category;
+        const color = CATEGORY_META[blk.category].color;
+        document.getElementById('avg-sched-inspector').innerHTML =
+          `<span class="inline-block w-2 h-2 mr-1.5" style="background:${color}"></span><strong class="text-ink">${escapeHtml(lastCompositeLabel)}</strong> &middot; <span class="text-ink">${escapeHtml(formatRange(blk.start, blk.end))}</span> &middot; <strong>${escapeHtml(disp)}</strong> (${blk.pct}% of subgroup active in this window)`;
+      };
+      avgBar.addEventListener('mouseover', inspectAvg);
+      avgBar.addEventListener('click', inspectAvg);
+
       document.getElementById('lessons-try-overlay-btn').addEventListener('click', () => {
         state.userOverlayEnabled = true;
         switchView('atlas');
