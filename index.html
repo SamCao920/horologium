@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HOROLOGIUM — Minimalist Atlas of Daily Routines</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111110'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23F8F6F1' stroke-width='2.5'/%3E%3Cpath d='M32 10 A22 22 0 0 1 54 32' fill='none' stroke='%23C83E2B' stroke-width='5'/%3E%3Cpath d='M10 32 A22 22 0 0 1 32 10' fill='none' stroke='%2318283E' stroke-width='5'/%3E%3Cline x1='32' y1='32' x2='32' y2='16' stroke='%23F8F6F1' stroke-width='2.5' stroke-linecap='square'/%3E%3Cline x1='32' y1='32' x2='44' y2='32' stroke='%23C83E2B' stroke-width='2.5' stroke-linecap='square'/%3E%3Ccircle cx='32' cy='32' r='2.8' fill='%23F8F6F1'/%3E%3C/svg%3E" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
@@ -88,14 +90,22 @@
   <!-- Minimalist Architectural Top Bar -->
   <header class="border-b border-ink bg-paper/95 backdrop-blur-sm sticky top-0 z-30">
     <div class="max-w-[1380px] mx-auto px-4 sm:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
-      <div class="flex items-center gap-4">
-        <a href="#top" class="font-mono text-xs sm:text-sm font-medium tracking-[0.26em] uppercase text-ink">
-          HOROLOGIUM
+      <div class="flex items-center gap-4 sm:gap-5">
+        <a href="#top" id="brand-home-link" class="inline-flex items-center gap-2.5 font-mono text-xs sm:text-sm font-medium tracking-[0.26em] uppercase text-ink">
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" fill="#111110"/>
+            <circle cx="32" cy="32" r="22" fill="none" stroke="#F8F6F1" stroke-width="3"/>
+            <path d="M32 10 A22 22 0 0 1 54 32" fill="none" stroke="#C83E2B" stroke-width="6"/>
+            <line x1="32" y1="32" x2="32" y2="16" stroke="#F8F6F1" stroke-width="3"/>
+            <line x1="32" y1="32" x2="44" y2="32" stroke="#C83E2B" stroke-width="3"/>
+          </svg>
+          <span>HOROLOGIUM</span>
         </a>
-        <span class="hidden md:inline-block h-3.5 w-px bg-rule"></span>
-        <span class="hidden md:inline-block text-[11px] text-muted tracking-wide">
-          Archival Atlas of Daily Routines &amp; Work Habits
-        </span>
+        <span class="h-3.5 w-px bg-rule"></span>
+        <nav class="flex items-center gap-1" aria-label="Primary views">
+          <button type="button" id="nav-atlas-btn" data-switch-view="atlas" class="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors">Atlas</button>
+          <button type="button" id="nav-stats-btn" data-switch-view="stats" class="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors">Statistics</button>
+        </nav>
       </div>
 
       <!-- Interactive High-Contrast Minimalist Legend (click to isolate category) -->
@@ -109,7 +119,8 @@
     </div>
   </header>
 
-  <main id="top" class="max-w-[1380px] mx-auto px-4 sm:px-8 pt-10 sm:pt-14 pb-16 space-y-12 sm:space-y-16">
+  <main id="top" class="max-w-[1380px] mx-auto px-4 sm:px-8 pt-10 sm:pt-14 pb-16">
+    <div id="atlas-view" class="space-y-12 sm:space-y-16">
 
     <!-- Striking Minimalist Hero -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pb-10 border-b border-ink">
@@ -381,12 +392,170 @@
         </button>
       </div>
     </section>
+    </div>
+
+    <!-- COMPREHENSIVE STATISTICS VIEW -->
+    <div id="stats-view" class="hidden space-y-12 sm:space-y-14">
+      <!-- Stats Hero -->
+      <section class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-ink">
+        <div class="max-w-2xl space-y-3">
+          <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-catWork">
+            Statistical Analysis &nbsp;/&nbsp; N = <span id="stats-sample-n">250</span> Documented Schedules
+          </p>
+          <h1 class="font-editorial text-4xl sm:text-5xl font-light tracking-[-0.03em] leading-[1.04] text-ink">
+            The anatomy of <em class="italic font-normal">two hundred fifty</em> days.
+          </h1>
+          <p class="text-sm text-muted leading-relaxed">
+            Distributions, hourly activity curves, discipline benchmarks, chronotype splits, and correlations computed live across the entire Horologium dataset.
+          </p>
+        </div>
+        <button type="button" data-switch-view="atlas" class="self-start md:self-end font-mono text-[11px] uppercase tracking-[0.12em] px-4 py-2 border border-ink bg-pure text-ink hover:bg-ink hover:text-paper transition-colors">
+          &larr; Back to Atlas
+        </button>
+      </section>
+
+      <!-- 5-Category Statistical Summary Strip (Mean / Median / SD / Range) -->
+      <section class="space-y-3">
+        <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">01 / Central Tendency &amp; Dispersion (Hours per 24h Day)</div>
+        <div id="stats-summary-strip" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-rule border border-rule"></div>
+      </section>
+
+      <!-- Row 1: Sleep Distribution + Deep Work Distribution -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="flex items-baseline justify-between gap-2 border-b border-rule pb-3">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">02 / Distribution</span>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Sleep Duration Histogram</h2>
+            </div>
+            <span id="stats-sleep-callout" class="font-mono text-[11px] text-catSleep"></span>
+          </div>
+          <div class="relative h-72"><canvas id="chart-sleep-dist"></canvas></div>
+        </div>
+
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="flex items-baseline justify-between gap-2 border-b border-rule pb-3">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">03 / Distribution</span>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Deep Work Duration Histogram</h2>
+            </div>
+            <span id="stats-work-callout" class="font-mono text-[11px] text-catWork"></span>
+          </div>
+          <div class="relative h-72"><canvas id="chart-work-dist"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Row 2: 24-Hour Collective Activity Curve (Full Width) -->
+      <section class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-rule pb-3">
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">04 / Circadian Aggregate</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">24-Hour Collective Activity Curve (% of Sample Active per Hour)</h2>
+          </div>
+          <span id="stats-peak-callout" class="font-mono text-[11px] text-catWork"></span>
+        </div>
+        <div class="relative h-80"><canvas id="chart-hourly-curve"></canvas></div>
+      </section>
+
+      <!-- Row 3: Sleep vs Deep Work Scatter (with Pearson r) + Wake-Up Time Distribution -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="flex items-baseline justify-between gap-2 border-b border-rule pb-3">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">05 / Correlation</span>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Sleep vs. Deep Work (All 250 Figures)</h2>
+            </div>
+            <span id="stats-corr-callout" class="font-mono text-[11px] text-ink"></span>
+          </div>
+          <div class="relative h-72"><canvas id="chart-scatter"></canvas></div>
+        </div>
+
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="flex items-baseline justify-between gap-2 border-b border-rule pb-3">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">06 / Chronobiology</span>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Wake-Up Time Distribution</h2>
+            </div>
+            <span id="stats-wake-callout" class="font-mono text-[11px] text-muted"></span>
+          </div>
+          <div class="relative h-72"><canvas id="chart-wake-dist"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Row 4: Profession Benchmarks Chart + Era Evolution Chart -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="border-b border-rule pb-3">
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">07 / Discipline Benchmarks</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Average Hours by Profession</h2>
+          </div>
+          <div class="relative h-72"><canvas id="chart-profession"></canvas></div>
+        </div>
+
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="border-b border-rule pb-3">
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">08 / Historical Shift</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Routines Across Historical Eras</h2>
+          </div>
+          <div class="relative h-72"><canvas id="chart-era"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Row 5: Chronotype Breakdown + Top Daily Habits -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="border-b border-rule pb-3">
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">09 / Chronotype Comparison</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Early Birds vs. Night Owls vs. Biphasic</h2>
+          </div>
+          <div id="stats-chronotype-table" class="overflow-x-auto"></div>
+        </div>
+
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="border-b border-rule pb-3">
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">10 / Behavioral Prevalence</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Most Common Daily Habits</h2>
+          </div>
+          <div class="relative h-72"><canvas id="chart-habits"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Row 6: Full Profession Statistical Table -->
+      <section class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">11 / Comparative Ledger</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Discipline Statistical Matrix</h2>
+          </div>
+          <span id="stats-fidelity-callout" class="font-mono text-[11px] text-catExercise"></span>
+        </div>
+        <div id="stats-profession-table" class="overflow-x-auto"></div>
+      </section>
+
+      <!-- Row 7: Notable Extremes / Records (Clickable to open Detail Drawer) -->
+      <section class="space-y-3">
+        <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">12 / Archive Extremes (Click any record to inspect)</div>
+        <div id="stats-extremes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-rule border border-rule"></div>
+      </section>
+    </div>
   </main>
 
-  <footer class="border-t border-ink bg-paper py-8">
-    <div class="max-w-[1380px] mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-muted">
-      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink">HOROLOGIUM &mdash; 250 DOCUMENTED ROUTINES</p>
-      <p>Every entry cites its primary biographical, interview, or archival schedule source. Exports valid RFC 5545 <code class="font-mono text-ink">.ics</code> files.</p>
+  <footer class="border-t border-ink bg-paper py-10">
+    <div class="max-w-[1380px] mx-auto px-4 sm:px-8 space-y-4">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-muted">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink">HOROLOGIUM &mdash; 250 DOCUMENTED ROUTINES</p>
+        <p>Every entry cites its primary biographical, interview, or archival schedule source. Exports valid RFC 5545 <code class="font-mono text-ink">.ics</code> files.</p>
+      </div>
+      <div class="pt-4 border-t border-rule flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-muted">
+        <p>
+          Built by <a href="https://fangyuancao.me" target="_blank" rel="noopener noreferrer" class="text-ink font-medium underline decoration-rule hover:decoration-catWork hover:text-catWork transition-colors">Fangyuan Cao</a> in November 2026.
+        </p>
+        <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span>Open source under the MIT License</span>
+          <span class="text-rule">&middot;</span>
+          <a href="https://github.com/SamCao920/horologium" target="_blank" rel="noopener noreferrer" class="font-mono text-[11px] text-ink underline decoration-rule hover:decoration-catWork hover:text-catWork transition-colors">GitHub Repository &nearr;</a>
+        </p>
+      </div>
     </div>
   </footer>
 
@@ -521,6 +690,7 @@
         sleep: '23:00',
       },
       activeDetailId: null,
+      activeView: 'atlas',
     };
 
     function loadPersistedState() {
@@ -1341,10 +1511,17 @@
           </button>
         </div>
 
-        <!-- Bio & Habits -->
-        <div class="space-y-3">
-          <p class="text-sm text-ink leading-relaxed">${escapeHtml(f.bio)}</p>
-          <div class="flex flex-wrap gap-1.5">${habitsHtml}</div>
+        <!-- Portrait & Bio -->
+        <div class="flex flex-col sm:flex-row gap-5 items-start">
+          <div id="drawer-portrait-wrap" class="w-28 h-36 sm:w-32 sm:h-40 shrink-0 border border-ink bg-pure relative overflow-hidden flex flex-col items-center justify-center text-center select-none">
+            <span class="font-editorial text-3xl text-ink tracking-tight">${escapeHtml(getInitials(f.name))}</span>
+            <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-subtle mt-1">${escapeHtml(f.years)}</span>
+          </div>
+          <div class="space-y-3 min-w-0 flex-1">
+            <p class="text-sm text-ink leading-relaxed">${escapeHtml(f.bio)}</p>
+            <div class="flex flex-wrap gap-1.5">${habitsHtml}</div>
+            <p id="drawer-portrait-credit" class="hidden font-mono text-[9px] uppercase tracking-[0.12em] text-subtle"></p>
+          </div>
         </div>
 
         <!-- 24-Hour Allocation -->
@@ -1399,6 +1576,7 @@
         backdrop.classList.remove('opacity-0');
         panel.classList.remove('translate-x-full');
       });
+      loadPortraitIntoDrawer(f);
     }
 
     function closeDetailDrawer() {
@@ -1508,6 +1686,607 @@
     // =========================================================================
     // INITIALIZATION & EVENT DELEGATION
     // =========================================================================
+    // =========================================================================
+    // PORTRAIT LOADER (Wikipedia Public REST API + Editorial Monogram Fallback)
+    // =========================================================================
+    const WIKI_TITLE_OVERRIDES = {
+      'francis-bacon-painter': 'Francis Bacon (artist)',
+      'isak-dinesen': 'Karen Blixen',
+      'marisol-escobar': 'Marisol Escobar',
+      'seneca': 'Seneca the Younger',
+      'duke-of-wellington': 'Arthur Wellesley, 1st Duke of Wellington',
+      'bf-skinner': 'B. F. Skinner',
+      'eo-wilson': 'E. O. Wilson',
+      'eb-white': 'E. B. White',
+      'wh-auden': 'W. H. Auden',
+      'wb-yeats': 'W. B. Yeats',
+      'pg-wodehouse': 'P. G. Wodehouse',
+      'somerset-maugham': 'W. Somerset Maugham',
+      'f-scott-fitzgerald': 'F. Scott Fitzgerald',
+      'octavia-butler': 'Octavia E. Butler',
+      'stonewall-jackson': 'Stonewall Jackson',
+      'george-c-marshall': 'George C. Marshall',
+      'george-s-patton': 'George S. Patton',
+      'ulysses-s-grant': 'Ulysses S. Grant',
+      'dwight-eisenhower': 'Dwight D. Eisenhower',
+      'chester-nimitz': 'Chester W. Nimitz',
+      'john-pershing': 'John J. Pershing',
+      'robert-e-lee': 'Robert E. Lee',
+      'pyotr-tchaikovsky': 'Pyotr Ilyich Tchaikovsky',
+      'mason-currey': 'Mason Currey',
+    };
+    const portraitCache = new Map();
+
+    function getInitials(name) {
+      const parts = String(name).trim().split(/\s+/);
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+
+    async function loadPortraitIntoDrawer(figure) {
+      const wrap = document.getElementById('drawer-portrait-wrap');
+      const credit = document.getElementById('drawer-portrait-credit');
+      if (!wrap) return;
+
+      const renderImg = (imgUrl, pageUrl) => {
+        if (state.activeDetailId !== figure.id) return;
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = figure.name;
+        img.className = 'w-full h-full object-cover object-top grayscale-[25%] contrast-[1.04] hover:grayscale-0 transition-all duration-300';
+        img.onload = () => {
+          if (state.activeDetailId !== figure.id) return;
+          wrap.innerHTML = '';
+          wrap.appendChild(img);
+          if (credit) {
+            credit.innerHTML = pageUrl
+              ? `Portrait via <a href="${escapeHtml(pageUrl)}" target="_blank" rel="noopener noreferrer" class="underline hover:text-ink">Wikipedia &nearr;</a>`
+              : 'Portrait via Wikipedia';
+            credit.classList.remove('hidden');
+          }
+        };
+      };
+
+      if (portraitCache.has(figure.id)) {
+        const cached = portraitCache.get(figure.id);
+        if (cached && cached.imgUrl) renderImg(cached.imgUrl, cached.pageUrl);
+        return;
+      }
+
+      const wikiTitle = WIKI_TITLE_OVERRIDES[figure.id] || figure.name;
+      try {
+        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiTitle)}`);
+        if (!res.ok) {
+          portraitCache.set(figure.id, null);
+          return;
+        }
+        const data = await res.json();
+        const imgUrl = (data.thumbnail && data.thumbnail.source) || (data.originalimage && data.originalimage.source) || null;
+        const pageUrl = (data.content_urls && data.content_urls.desktop && data.content_urls.desktop.page) || null;
+        portraitCache.set(figure.id, imgUrl ? { imgUrl, pageUrl } : null);
+        if (imgUrl) renderImg(imgUrl, pageUrl);
+      } catch (_) {
+        portraitCache.set(figure.id, null);
+      }
+    }
+
+    // =========================================================================
+    // VIEW SWITCHER (ATLAS <-> STATISTICS) & COMPREHENSIVE STATS ENGINE
+    // =========================================================================
+    const statsCharts = {};
+
+    function switchView(view) {
+      state.activeView = view === 'stats' ? 'stats' : 'atlas';
+      const atlasEl = document.getElementById('atlas-view');
+      const statsEl = document.getElementById('stats-view');
+      const navAtlas = document.getElementById('nav-atlas-btn');
+      const navStats = document.getElementById('nav-stats-btn');
+
+      atlasEl.classList.toggle('hidden', state.activeView !== 'atlas');
+      statsEl.classList.toggle('hidden', state.activeView !== 'stats');
+
+      if (state.activeView === 'atlas') {
+        navAtlas.className = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors';
+        navStats.className = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors';
+        try { if (window.location.hash === '#stats') history.replaceState(null, '', window.location.pathname + window.location.search); } catch (_) {}
+      } else {
+        navStats.className = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors';
+        navAtlas.className = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors';
+        try { history.replaceState(null, '', '#stats'); } catch (_) {}
+        renderStatisticsView();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function calcStats(arr) {
+      const sorted = arr.slice().sort((a, b) => a - b);
+      const n = sorted.length || 1;
+      const mean = sorted.reduce((acc, v) => acc + v, 0) / n;
+      const mid = Math.floor(n / 2);
+      const median = n % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
+      const variance = sorted.reduce((acc, v) => acc + Math.pow(v - mean, 2), 0) / n;
+      const sd = Math.sqrt(variance);
+      return { mean, median, sd, min: sorted[0] || 0, max: sorted[n - 1] || 0 };
+    }
+
+    function calcPearson(xs, ys) {
+      const n = xs.length;
+      if (n < 2) return 0;
+      const mx = xs.reduce((a, b) => a + b, 0) / n;
+      const my = ys.reduce((a, b) => a + b, 0) / n;
+      let num = 0, dx = 0, dy = 0;
+      for (let i = 0; i < n; i++) {
+        const a = xs[i] - mx;
+        const b = ys[i] - my;
+        num += a * b;
+        dx += a * a;
+        dy += b * b;
+      }
+      const denom = Math.sqrt(dx * dy);
+      return denom === 0 ? 0 : num / denom;
+    }
+
+    function destroyChart(key) {
+      if (statsCharts[key]) {
+        statsCharts[key].destroy();
+        delete statsCharts[key];
+      }
+    }
+
+    function renderStatisticsView() {
+      const N = FIGURES.length;
+      document.getElementById('stats-sample-n').textContent = String(N);
+
+      const perFigure = FIGURES.map(f => {
+        const t = computeTotals(f.schedule);
+        return {
+          ...f,
+          sleep: t['Sleep'],
+          work: t['Deep Work'],
+          exercise: t['Exercise'],
+          leisure: t['Leisure'],
+          meals: t['Meals'],
+          wake: getWakeHour(f.schedule),
+        };
+      });
+
+      // 1. 5-Category Central Tendency & Dispersion Strip
+      const catDefs = [
+        { key: 'sleep', label: 'Sleep', color: CATEGORY_META['Sleep'].color },
+        { key: 'work', label: 'Deep Work', color: CATEGORY_META['Deep Work'].color },
+        { key: 'exercise', label: 'Exercise', color: CATEGORY_META['Exercise'].color },
+        { key: 'leisure', label: 'Leisure', color: CATEGORY_META['Leisure'].color },
+        { key: 'meals', label: 'Meals', color: CATEGORY_META['Meals'].color },
+      ];
+      const stripEl = document.getElementById('stats-summary-strip');
+      const catStats = {};
+      stripEl.innerHTML = catDefs.map(c => {
+        const st = calcStats(perFigure.map(x => x[c.key]));
+        catStats[c.key] = st;
+        return `
+          <div class="bg-pure p-4 sm:p-5 space-y-2">
+            <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">
+              <span class="w-2.5 h-2.5 inline-block" style="background:${c.color}"></span>
+              <span>${c.label}</span>
+            </div>
+            <div class="font-editorial text-3xl text-ink">${st.mean.toFixed(2)}h <span class="font-mono text-[10px] text-subtle">mean</span></div>
+            <div class="grid grid-cols-2 gap-1 pt-2 border-t border-rule font-mono text-[10px] text-muted">
+              <span>Med: <strong class="text-ink">${st.median.toFixed(1)}h</strong></span>
+              <span>SD: <strong class="text-ink">&plusmn;${st.sd.toFixed(1)}h</strong></span>
+              <span class="col-span-2">Range: <strong class="text-ink">${st.min.toFixed(1)}h – ${st.max.toFixed(1)}h</strong></span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('stats-sleep-callout').textContent = `Mean ${catStats.sleep.mean.toFixed(1)}h · Median ${catStats.sleep.median.toFixed(1)}h`;
+      document.getElementById('stats-work-callout').textContent = `Mean ${catStats.work.mean.toFixed(1)}h · Median ${catStats.work.median.toFixed(1)}h`;
+
+      // Common Chart.js styling
+      const monoFont = { family: 'JetBrains Mono, monospace', size: 10 };
+      const gridColor = '#ECE6DC';
+      const tickColor = '#635E57';
+      const hasChart = typeof Chart !== 'undefined';
+
+      // 2. Sleep Distribution Histogram
+      const sleepBins = [
+        { label: '<5h', test: v => v < 5 },
+        { label: '5–6h', test: v => v >= 5 && v < 6 },
+        { label: '6–7h', test: v => v >= 6 && v < 7 },
+        { label: '7–8h', test: v => v >= 7 && v < 8 },
+        { label: '8–9h', test: v => v >= 8 && v < 9 },
+        { label: '9–10h', test: v => v >= 9 && v < 10 },
+        { label: '10h+', test: v => v >= 10 },
+      ];
+      if (hasChart) {
+        destroyChart('sleep');
+        statsCharts.sleep = new Chart(document.getElementById('chart-sleep-dist'), {
+          type: 'bar',
+          data: {
+            labels: sleepBins.map(b => b.label),
+            datasets: [{
+              label: 'Figures',
+              data: sleepBins.map(b => perFigure.filter(x => b.test(x.sleep)).length),
+              backgroundColor: CATEGORY_META['Sleep'].color,
+              borderRadius: 0,
+            }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 3. Deep Work Distribution Histogram
+      const workBins = [
+        { label: '<3h', test: v => v < 3 },
+        { label: '3–5h', test: v => v >= 3 && v < 5 },
+        { label: '5–7h', test: v => v >= 5 && v < 7 },
+        { label: '7–9h', test: v => v >= 7 && v < 9 },
+        { label: '9–11h', test: v => v >= 9 && v < 11 },
+        { label: '11h+', test: v => v >= 11 },
+      ];
+      if (hasChart) {
+        destroyChart('work');
+        statsCharts.work = new Chart(document.getElementById('chart-work-dist'), {
+          type: 'bar',
+          data: {
+            labels: workBins.map(b => b.label),
+            datasets: [{
+              label: 'Figures',
+              data: workBins.map(b => perFigure.filter(x => b.test(x.work)).length),
+              backgroundColor: CATEGORY_META['Deep Work'].color,
+              borderRadius: 0,
+            }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 4. 24-Hour Collective Activity Curve (% of sample active in each category at hour h+0.5)
+      const hours = Array.from({ length: 24 }, (_, i) => i);
+      const catCurves = { 'Sleep': [], 'Deep Work': [], 'Exercise': [], 'Leisure': [], 'Meals': [] };
+      let peakWorkHour = 10, peakWorkPct = 0;
+      for (const h of hours) {
+        const probe = h + 0.5;
+        const counts = { 'Sleep': 0, 'Deep Work': 0, 'Exercise': 0, 'Leisure': 0, 'Meals': 0 };
+        for (const f of FIGURES) {
+          const blk = f.schedule.find(b => b.start <= probe && b.end > probe);
+          if (blk) counts[blk.category]++;
+        }
+        for (const k of Object.keys(counts)) {
+          const pct = Math.round((counts[k] / N) * 1000) / 10;
+          catCurves[k].push(pct);
+          if (k === 'Deep Work' && pct > peakWorkPct) {
+            peakWorkPct = pct;
+            peakWorkHour = h;
+          }
+        }
+      }
+      document.getElementById('stats-peak-callout').textContent = `Peak Deep Work: ${formatHour(peakWorkHour)} (${peakWorkPct}% working)`;
+      if (hasChart) {
+        destroyChart('hourly');
+        statsCharts.hourly = new Chart(document.getElementById('chart-hourly-curve'), {
+          type: 'line',
+          data: {
+            labels: hours.map(h => pad2(h) + ':00'),
+            datasets: ['Deep Work', 'Sleep', 'Exercise', 'Leisure', 'Meals'].map(cat => ({
+              label: cat,
+              data: catCurves[cat],
+              borderColor: CATEGORY_META[cat].color,
+              backgroundColor: CATEGORY_META[cat].color + '18',
+              borderWidth: cat === 'Deep Work' || cat === 'Sleep' ? 2.2 : 1.5,
+              pointRadius: 2,
+              tension: 0.25,
+              fill: cat === 'Deep Work',
+            })),
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: { position: 'top', labels: { font: monoFont, boxWidth: 10, color: '#111110' } },
+              tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } },
+            },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, max: 100, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor, callback: v => v + '%' } },
+            },
+          },
+        });
+      }
+
+      // 5. Sleep vs. Deep Work Scatter Plot + Pearson r
+      const rVal = calcPearson(perFigure.map(x => x.sleep), perFigure.map(x => x.work));
+      document.getElementById('stats-corr-callout').textContent = `Pearson r = ${rVal.toFixed(2)}`;
+      if (hasChart) {
+        destroyChart('scatter');
+        const chronoColors = {
+          'Early Bird': '#1D684E',
+          'Night Owl': '#C83E2B',
+          'Biphasic Sleeper': '#18283E',
+        };
+        statsCharts.scatter = new Chart(document.getElementById('chart-scatter'), {
+          type: 'scatter',
+          data: {
+            datasets: ['Early Bird', 'Night Owl', 'Biphasic Sleeper'].map(ch => ({
+              label: ch,
+              data: perFigure.filter(x => x.chronotype === ch).map(x => ({ x: x.sleep, y: x.work, name: x.name })),
+              backgroundColor: chronoColors[ch] + 'CC',
+              pointRadius: 4,
+              pointHoverRadius: 6,
+            })),
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { font: monoFont, boxWidth: 8, color: '#111110' } },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.raw.name}: ${ctx.raw.x}h sleep, ${ctx.raw.y}h work`,
+                },
+              },
+            },
+            scales: {
+              x: { title: { display: true, text: 'Sleep (hrs)', font: monoFont, color: tickColor }, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+              y: { title: { display: true, text: 'Deep Work (hrs)', font: monoFont, color: tickColor }, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 6. Wake-Up Time Distribution
+      const wakeBuckets = [
+        { label: 'Before 5a', test: w => w < 5 },
+        { label: '5–6a', test: w => w >= 5 && w < 6 },
+        { label: '6–7a', test: w => w >= 6 && w < 7 },
+        { label: '7–8a', test: w => w >= 7 && w < 8 },
+        { label: '8–9a', test: w => w >= 8 && w < 9 },
+        { label: '9–11a', test: w => w >= 9 && w < 11 },
+        { label: '11a+', test: w => w >= 11 },
+      ];
+      const wakeMed = calcStats(perFigure.map(x => x.wake)).median;
+      document.getElementById('stats-wake-callout').textContent = `Median wake: ${formatHour(wakeMed)}`;
+      if (hasChart) {
+        destroyChart('wake');
+        statsCharts.wake = new Chart(document.getElementById('chart-wake-dist'), {
+          type: 'bar',
+          data: {
+            labels: wakeBuckets.map(b => b.label),
+            datasets: [{
+              label: 'Figures',
+              data: wakeBuckets.map(b => perFigure.filter(x => b.test(x.wake)).length),
+              backgroundColor: '#111110',
+              borderRadius: 0,
+            }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 7. Profession Benchmarks Chart & Table
+      const profList = PROFESSIONS.filter(p => p !== 'All');
+      const profStats = profList.map(prof => {
+        const sub = perFigure.filter(x => x.profession === prof);
+        const n = sub.length || 1;
+        return {
+          prof,
+          n: sub.length,
+          sleep: sub.reduce((a, b) => a + b.sleep, 0) / n,
+          work: sub.reduce((a, b) => a + b.work, 0) / n,
+          exercise: sub.reduce((a, b) => a + b.exercise, 0) / n,
+          earlyPct: Math.round((sub.filter(x => x.chronotype === 'Early Bird').length / n) * 100),
+          owlPct: Math.round((sub.filter(x => x.chronotype === 'Night Owl').length / n) * 100),
+        };
+      });
+      if (hasChart) {
+        destroyChart('profession');
+        statsCharts.profession = new Chart(document.getElementById('chart-profession'), {
+          type: 'bar',
+          data: {
+            labels: profStats.map(p => p.prof),
+            datasets: [
+              { label: 'Deep Work', data: profStats.map(p => +p.work.toFixed(1)), backgroundColor: CATEGORY_META['Deep Work'].color },
+              { label: 'Sleep', data: profStats.map(p => +p.sleep.toFixed(1)), backgroundColor: CATEGORY_META['Sleep'].color },
+              { label: 'Exercise', data: profStats.map(p => +p.exercise.toFixed(1)), backgroundColor: CATEGORY_META['Exercise'].color },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top', labels: { font: monoFont, boxWidth: 10, color: '#111110' } } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 8. Era Evolution Chart
+      const eras = Object.keys(ERA_ORDER);
+      const eraStats = eras.map(era => {
+        const sub = perFigure.filter(x => x.era === era);
+        const n = sub.length || 1;
+        return {
+          era: era.replace('Renaissance & Enlightenment', 'Ren. / Enl.').replace('Early–Mid 20th Century', 'Early–Mid 20c'),
+          n: sub.length,
+          sleep: +(sub.reduce((a, b) => a + b.sleep, 0) / n).toFixed(1),
+          work: +(sub.reduce((a, b) => a + b.work, 0) / n).toFixed(1),
+          exercise: +(sub.reduce((a, b) => a + b.exercise, 0) / n).toFixed(1),
+        };
+      });
+      if (hasChart) {
+        destroyChart('era');
+        statsCharts.era = new Chart(document.getElementById('chart-era'), {
+          type: 'line',
+          data: {
+            labels: eraStats.map(e => `${e.era} (${e.n})`),
+            datasets: [
+              { label: 'Sleep', data: eraStats.map(e => e.sleep), borderColor: CATEGORY_META['Sleep'].color, tension: 0.2, borderWidth: 2 },
+              { label: 'Deep Work', data: eraStats.map(e => e.work), borderColor: CATEGORY_META['Deep Work'].color, tension: 0.2, borderWidth: 2 },
+              { label: 'Exercise', data: eraStats.map(e => e.exercise), borderColor: CATEGORY_META['Exercise'].color, tension: 0.2, borderWidth: 2 },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top', labels: { font: monoFont, boxWidth: 10, color: '#111110' } } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 9. Chronotype Comparison Table
+      const chronoRows = ['Early Bird', 'Night Owl', 'Biphasic Sleeper'].map(ch => {
+        const sub = perFigure.filter(x => x.chronotype === ch);
+        const n = sub.length || 1;
+        return {
+          ch,
+          n: sub.length,
+          pct: Math.round((sub.length / N) * 100),
+          sleep: (sub.reduce((a, b) => a + b.sleep, 0) / n).toFixed(1),
+          work: (sub.reduce((a, b) => a + b.work, 0) / n).toFixed(1),
+          ex: (sub.reduce((a, b) => a + b.exercise, 0) / n).toFixed(1),
+        };
+      });
+      document.getElementById('stats-chronotype-table').innerHTML = `
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-ink font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">
+              <th class="py-2.5 pr-3">Chronotype</th>
+              <th class="py-2.5 px-2">Count</th>
+              <th class="py-2.5 px-2">Share</th>
+              <th class="py-2.5 px-2">Avg Sleep</th>
+              <th class="py-2.5 px-2">Avg Work</th>
+              <th class="py-2.5 pl-2">Avg Exercise</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-rule font-mono">
+            ${chronoRows.map(r => `
+              <tr>
+                <td class="py-3 pr-3 font-sans font-medium text-ink">${escapeHtml(r.ch)}</td>
+                <td class="py-3 px-2 text-ink">${r.n}</td>
+                <td class="py-3 px-2 text-muted">${r.pct}%</td>
+                <td class="py-3 px-2 text-catSleep">${r.sleep}h</td>
+                <td class="py-3 px-2 text-catWork">${r.work}h</td>
+                <td class="py-3 pl-2 text-catExercise">${r.ex}h</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+
+      // 10. Top Habits Horizontal Bar Chart
+      const habitCounts = HABITS.map(h => ({
+        habit: h,
+        count: FIGURES.filter(f => f.habits.includes(h)).length,
+      })).sort((a, b) => b.count - a.count);
+      if (hasChart) {
+        destroyChart('habits');
+        statsCharts.habits = new Chart(document.getElementById('chart-habits'), {
+          type: 'bar',
+          data: {
+            labels: habitCounts.map(h => h.habit),
+            datasets: [{
+              label: 'Figures',
+              data: habitCounts.map(h => h.count),
+              backgroundColor: '#111110',
+              borderRadius: 0,
+            }],
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+              y: { grid: { display: false }, ticks: { font: monoFont, color: '#111110' } },
+            },
+          },
+        });
+      }
+
+      // 11. Discipline Statistical Matrix Table + Source Fidelity Callout
+      const clockedCount = FIGURES.filter(f => f.verificationTier === 'Primary Clocked').length;
+      document.getElementById('stats-fidelity-callout').textContent = `Primary Clocked: ${clockedCount} (${Math.round((clockedCount / N) * 100)}%) · Biographical: ${N - clockedCount}`;
+      document.getElementById('stats-profession-table').innerHTML = `
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-ink font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">
+              <th class="py-2.5 pr-4">Profession</th>
+              <th class="py-2.5 px-3">Count</th>
+              <th class="py-2.5 px-3">Avg Sleep</th>
+              <th class="py-2.5 px-3">Avg Deep Work</th>
+              <th class="py-2.5 px-3">Avg Exercise</th>
+              <th class="py-2.5 px-3">Early Birds</th>
+              <th class="py-2.5 pl-3">Night Owls</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-rule font-mono">
+            ${profStats.map(p => `
+              <tr>
+                <td class="py-3 pr-4 font-sans font-medium text-ink">${escapeHtml(p.prof)}</td>
+                <td class="py-3 px-3 text-ink">${p.n}</td>
+                <td class="py-3 px-3 text-catSleep">${p.sleep.toFixed(1)}h</td>
+                <td class="py-3 px-3 text-catWork">${p.work.toFixed(1)}h</td>
+                <td class="py-3 px-3 text-catExercise">${p.exercise.toFixed(1)}h</td>
+                <td class="py-3 px-3 text-muted">${p.earlyPct}%</td>
+                <td class="py-3 pl-3 text-muted">${p.owlPct}%</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+
+      // 12. Archive Extremes Cards (Clickable)
+      const mostWork = perFigure.slice().sort((a, b) => b.work - a.work)[0];
+      const mostSleep = perFigure.slice().sort((a, b) => b.sleep - a.sleep)[0];
+      const leastSleep = perFigure.slice().sort((a, b) => a.sleep - b.sleep)[0];
+      const mostExercise = perFigure.slice().sort((a, b) => b.exercise - a.exercise)[0];
+      const extremes = [
+        { label: 'Most Deep Work', fig: mostWork, stat: `${mostWork.work}h / day`, color: 'text-catWork' },
+        { label: 'Most Sleep', fig: mostSleep, stat: `${mostSleep.sleep}h / day`, color: 'text-catSleep' },
+        { label: 'Least Sleep', fig: leastSleep, stat: `${leastSleep.sleep}h / day`, color: 'text-ink' },
+        { label: 'Most Exercise', fig: mostExercise, stat: `${mostExercise.exercise}h / day`, color: 'text-catExercise' },
+      ];
+      document.getElementById('stats-extremes-grid').innerHTML = extremes.map(ex => `
+        <button type="button" data-open-detail="${escapeHtml(ex.fig.id)}" class="bg-pure hover:bg-paper p-5 text-left transition-colors group">
+          <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">${ex.label}</div>
+          <div class="font-editorial text-2xl text-ink group-hover:text-catWork transition-colors mt-1.5">${escapeHtml(ex.fig.name)}</div>
+          <div class="font-mono text-xs ${ex.color} mt-1">${ex.stat} &middot; ${escapeHtml(ex.fig.profession)}</div>
+        </button>
+      `).join('');
+    }
+
     function initStats() {
       document.getElementById('stat-total-figures').textContent = String(FIGURES.length);
       document.getElementById('stat-kpi-count').textContent = String(FIGURES.length);
@@ -1637,6 +2416,12 @@
       });
 
       document.addEventListener('click', e => {
+        const viewBtn = e.target.closest('[data-switch-view]');
+        if (viewBtn) {
+          switchView(viewBtn.dataset.switchView);
+          return;
+        }
+
         const hlBtn = e.target.closest('[data-highlight-cat]');
         if (hlBtn) {
           const cat = hlBtn.dataset.highlightCat;
@@ -1764,7 +2549,9 @@
       updateLiveClockLabel();
       renderComparison();
     }, 60000);
-    if (window.location.hash && window.location.hash.startsWith('#figure=')) {
+    if (window.location.hash === '#stats') {
+      switchView('stats');
+    } else if (window.location.hash && window.location.hash.startsWith('#figure=')) {
       const targetId = decodeURIComponent(window.location.hash.slice(8));
       if (FIGURES.some(f => f.id === targetId)) openDetailDrawer(targetId);
     }
