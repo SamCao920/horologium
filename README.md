@@ -4,12 +4,6 @@
 
 Horologium showcases reconstructed 24-hour schedules, work rituals, portraits, statistical patterns, and data-backed lessons drawn from **250 historical and modern figures**—spanning **Writers**, **Science & Medicine**, **Philosophers**, **Statesmen & Leaders**, and **Arts, Design & Music**.
 
-## What the Data Shows (Time-Anchored Subset, n = 144)
-
-- **The Prose Ceiling:** Time-anchored Writers log significantly fewer daily deep-work hours than Scientists despite nearly identical ~8-hour sleep.
-- **The Night-Owl Paradox:** Contrary to 5 AM lore, Night Owls in the time-anchored subset log more daily deep-work hours than Early Birds.
-- **Peripatetic Philosophers:** Philosophers average the most daily walking and physical movement of any discipline—nearly double Scientists.
-
 ## Features
 
 - **Atlas & Filterable Directory** — Search and filter all 250 profiles by discipline, chronotype (*Early Bird*, *Night Owl*, *Biphasic Sleeper*), daily habits, and **Source Fidelity** (*Time-Anchored* vs. *Biographical Sketch*), or press `/` to jump straight to search.
@@ -29,6 +23,6 @@ Horologium builds on the foundational archival work of Mason Currey's *Daily Rit
 
 Built as a single self-contained static site using HTML, Tailwind CSS, Chart.js, and vanilla JavaScript.
 
-## License & Author
+## License
 
-Built by [Fangyuan Cao](https://fangyuancao.me) in November 2026. Open source under the MIT License.
+Open source under the MIT License.
