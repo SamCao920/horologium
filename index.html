@@ -105,6 +105,7 @@
         <nav class="flex items-center gap-1" aria-label="Primary views">
           <button type="button" id="nav-atlas-btn" data-switch-view="atlas" class="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors">Atlas</button>
           <button type="button" id="nav-stats-btn" data-switch-view="stats" class="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors">Statistics</button>
+          <button type="button" id="nav-lessons-btn" data-switch-view="lessons" class="font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors">Lessons</button>
         </nav>
       </div>
 
@@ -532,10 +533,161 @@
         <div id="stats-profession-table" class="overflow-x-auto"></div>
       </section>
 
-      <!-- Row 7: Notable Extremes / Records (Clickable to open Detail Drawer) -->
+      <!-- Row 7: Deep Work Architecture + First-Work Start Time -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">12 / Session Architecture</span>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Deep Work Blocks per Day</h2>
+            </div>
+            <span id="stats-sprint-callout" class="font-mono text-[11px] text-catWork"></span>
+          </div>
+          <div class="relative h-72"><canvas id="chart-work-blocks"></canvas></div>
+        </div>
+
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">13 / Ignition Window</span>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">When Does First Deep Work Begin?</h2>
+            </div>
+            <span id="stats-latency-callout" class="font-mono text-[11px] text-ink"></span>
+          </div>
+          <div class="relative h-72"><canvas id="chart-first-work"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Row 8: Work-to-Sleep Ratio Distribution + Bedtime Distribution -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">14 / Output-to-Recovery Ratio</span>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Deep Work / Sleep Ratio</h2>
+            </div>
+            <span id="stats-ratio-callout" class="font-mono text-[11px] text-muted"></span>
+          </div>
+          <div class="relative h-72"><canvas id="chart-work-sleep-ratio"></canvas></div>
+        </div>
+
+        <div class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">15 / Evening Cadence</span>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Primary Bedtime Distribution</h2>
+            </div>
+            <span id="stats-bedtime-callout" class="font-mono text-[11px] text-catSleep"></span>
+          </div>
+          <div class="relative h-72"><canvas id="chart-bedtime-dist"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Row 9: 24-Hour Golden Hours Heatmap Strip -->
+      <section class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">16 / Focus Intensity Heatmap</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">24-Hour Deep Work &amp; Movement Density</h2>
+          </div>
+          <span id="stats-nonathlete-ex-callout" class="font-mono text-[11px] text-catExercise"></span>
+        </div>
+        <div id="stats-heatmap-strip" class="space-y-3"></div>
+      </section>
+
+      <!-- Row 10: Habit Impact Matrix (With Habit vs Without Habit) -->
+      <section class="bg-pure border border-rule p-5 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">17 / Behavioral Lift Analysis</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">How Each Daily Habit Shifts Work, Sleep &amp; Exercise</h2>
+          </div>
+          <span class="font-mono text-[10px] uppercase tracking-[0.1em] text-subtle">Delta vs. figures without habit</span>
+        </div>
+        <div id="stats-habit-impact-table" class="overflow-x-auto"></div>
+      </section>
+
+      <!-- Row 11: Percentile Reference Benchmarks + Source Fidelity Robustness Check -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="border-b border-rule pb-3">
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">18 / Percentile Benchmarks</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Quartile &amp; Decile Reference Table</h2>
+          </div>
+          <div id="stats-percentile-table" class="overflow-x-auto"></div>
+        </div>
+
+        <div class="lg:col-span-5 bg-pure border border-rule p-5 sm:p-6 space-y-4">
+          <div class="border-b border-rule pb-3">
+            <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">19 / Sensitivity Check</span>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Primary Clocked vs. Biographical</h2>
+          </div>
+          <div id="stats-robustness-table" class="overflow-x-auto"></div>
+          <p class="text-xs text-muted leading-relaxed pt-1">
+            Comparing exact clock-logged diaries against biographical reconstructions verifies whether core patterns hold under strict archival filtering.
+          </p>
+        </div>
+      </section>
+
+      <!-- Row 12: Notable Extremes / Records (Clickable to open Detail Drawer) -->
       <section class="space-y-3">
-        <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">12 / Archive Extremes (Click any record to inspect)</div>
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-subtle">20 / Archive Extremes (Click any record to inspect)</span>
+          <button type="button" data-switch-view="lessons" class="font-mono text-[11px] uppercase tracking-[0.12em] text-catWork hover:underline">
+            Read Data-Backed Lessons &rarr;
+          </button>
+        </div>
         <div id="stats-extremes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-rule border border-rule"></div>
+      </section>
+    </div>
+
+    <!-- THIRD PANEL: LESSONS LEARNED FROM THE DATA -->
+    <div id="lessons-view" class="hidden space-y-12 sm:space-y-14">
+      <!-- Lessons Hero -->
+      <section class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-ink">
+        <div class="max-w-2xl space-y-3">
+          <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-catWork">
+            Synthesis &nbsp;/&nbsp; Distilled From <span id="lessons-sample-n">250</span> Documented Lives
+          </p>
+          <h1 class="font-editorial text-4xl sm:text-5xl font-light tracking-[-0.03em] leading-[1.04] text-ink">
+            Eight lessons on <em class="italic font-normal">focus, rest,</em> and sustainable craft.
+          </h1>
+          <p class="text-sm sm:text-[15px] text-muted leading-relaxed">
+            Every principle below is grounded directly in the statistical distributions of the Horologium archive—not productivity folklore. Click any cited figure to inspect their exact 24-hour routine.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 self-start md:self-end">
+          <button type="button" data-switch-view="stats" class="font-mono text-[11px] uppercase tracking-[0.12em] px-3.5 py-2 border border-rule bg-pure text-ink hover:border-ink transition-colors">
+            View Raw Stats
+          </button>
+          <button type="button" data-switch-view="atlas" class="font-mono text-[11px] uppercase tracking-[0.12em] px-3.5 py-2 border border-ink bg-ink text-paper hover:bg-catWork hover:border-catWork transition-colors">
+            Explore Atlas
+          </button>
+        </div>
+      </section>
+
+      <!-- Live Synthesis Headline Strip -->
+      <section id="lessons-headline-strip" class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-rule border border-rule"></section>
+
+      <!-- 8 Data-Backed Lessons Editorial Grid -->
+      <section id="lessons-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 border-t border-l border-rule bg-paper"></section>
+
+      <!-- Interactive Callout: Apply the Lessons -->
+      <section class="bg-pure border border-ink p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="max-w-xl space-y-2">
+          <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-catWork">Put the Data Into Practice</div>
+          <h2 class="font-editorial text-2xl sm:text-3xl font-normal text-ink">Test your own day against the archive.</h2>
+          <p class="text-sm text-muted leading-relaxed">
+            Open the 24-Hour Comparison Studio with your personal schedule overlay enabled to compare your sleep window, wake-to-work latency, and deep-work hours directly against any three figures.
+          </p>
+        </div>
+        <button
+          type="button"
+          id="lessons-try-overlay-btn"
+          class="shrink-0 font-mono text-xs uppercase tracking-[0.14em] px-5 py-3 bg-ink text-paper hover:bg-catWork transition-colors"
+        >
+          Overlay My Schedule &rarr;
+        </button>
       </section>
     </div>
   </main>
@@ -1776,26 +1928,99 @@
     const statsCharts = {};
 
     function switchView(view) {
-      state.activeView = view === 'stats' ? 'stats' : 'atlas';
+      state.activeView = (view === 'stats' || view === 'lessons') ? view : 'atlas';
       const atlasEl = document.getElementById('atlas-view');
       const statsEl = document.getElementById('stats-view');
-      const navAtlas = document.getElementById('nav-atlas-btn');
-      const navStats = document.getElementById('nav-stats-btn');
+      const lessonsEl = document.getElementById('lessons-view');
+      const activeCls = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors';
+      const idleCls = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors';
 
       atlasEl.classList.toggle('hidden', state.activeView !== 'atlas');
       statsEl.classList.toggle('hidden', state.activeView !== 'stats');
+      lessonsEl.classList.toggle('hidden', state.activeView !== 'lessons');
+
+      document.getElementById('nav-atlas-btn').className = state.activeView === 'atlas' ? activeCls : idleCls;
+      document.getElementById('nav-stats-btn').className = state.activeView === 'stats' ? activeCls : idleCls;
+      document.getElementById('nav-lessons-btn').className = state.activeView === 'lessons' ? activeCls : idleCls;
 
       if (state.activeView === 'atlas') {
-        navAtlas.className = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors';
-        navStats.className = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors';
-        try { if (window.location.hash === '#stats') history.replaceState(null, '', window.location.pathname + window.location.search); } catch (_) {}
-      } else {
-        navStats.className = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-ink text-paper border border-ink transition-colors';
-        navAtlas.className = 'font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 bg-transparent text-muted border border-transparent hover:border-rule hover:text-ink transition-colors';
+        try {
+          if (window.location.hash === '#stats' || window.location.hash === '#lessons') {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        } catch (_) {}
+      } else if (state.activeView === 'stats') {
         try { history.replaceState(null, '', '#stats'); } catch (_) {}
         renderStatisticsView();
+      } else if (state.activeView === 'lessons') {
+        try { history.replaceState(null, '', '#lessons'); } catch (_) {}
+        renderLessonsView();
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function calcPercentile(sortedArr, p) {
+      if (!sortedArr.length) return 0;
+      const idx = (p / 100) * (sortedArr.length - 1);
+      const lo = Math.floor(idx);
+      const hi = Math.ceil(idx);
+      if (lo === hi) return sortedArr[lo];
+      return sortedArr[lo] + (sortedArr[hi] - sortedArr[lo]) * (idx - lo);
+    }
+
+    function analyzeFigureMetrics(f) {
+      const t = computeTotals(f.schedule);
+      const wake = getWakeHour(f.schedule);
+      // Merge contiguous Deep Work blocks (including midnight wrap)
+      const workBlocks = f.schedule.filter(b => b.category === 'Deep Work');
+      const mergedWork = [];
+      for (const b of workBlocks) {
+        if (mergedWork.length && Math.abs(mergedWork[mergedWork.length - 1].end - b.start) < 1e-9) {
+          mergedWork[mergedWork.length - 1].end = b.end;
+        } else {
+          mergedWork.push({ start: b.start, end: b.end });
+        }
+      }
+      let workBlockCount = mergedWork.length;
+      let durations = mergedWork.map(b => b.end - b.start);
+      if (mergedWork.length >= 2 && mergedWork[0].start === 0 && mergedWork[mergedWork.length - 1].end === 24) {
+        workBlockCount -= 1;
+        durations = [durations[0] + durations[durations.length - 1], ...durations.slice(1, -1)];
+      }
+      const longestSprint = durations.length ? Math.max(...durations) : 0;
+      // First Deep Work start after wake (or earliest >= 3)
+      let firstWork = null;
+      for (const b of workBlocks) {
+        if (b.start >= wake) { firstWork = b.start; break; }
+      }
+      if (firstWork === null && workBlocks.length) firstWork = workBlocks[0].start;
+      const wakeToWork = firstWork !== null ? ((firstWork - wake + 24) % 24) : null;
+
+      // Primary bedtime: start of longest overnight sleep block (preferring >= 18 or earliest 0..5)
+      const sleepBlocks = f.schedule.filter(b => b.category === 'Sleep');
+      let bedtime = 23;
+      const lateSleep = sleepBlocks.find(b => b.start >= 17);
+      if (lateSleep) {
+        bedtime = lateSleep.start;
+      } else if (sleepBlocks.length) {
+        bedtime = sleepBlocks[0].start;
+      }
+
+      return {
+        ...f,
+        sleep: t['Sleep'],
+        work: t['Deep Work'],
+        exercise: t['Exercise'],
+        leisure: t['Leisure'],
+        meals: t['Meals'],
+        wake,
+        bedtime,
+        workBlockCount,
+        longestSprint,
+        firstWork,
+        wakeToWork,
+        workSleepRatio: t['Sleep'] > 0 ? t['Deep Work'] / t['Sleep'] : 0,
+      };
     }
 
     function calcStats(arr) {
@@ -1837,18 +2062,7 @@
       const N = FIGURES.length;
       document.getElementById('stats-sample-n').textContent = String(N);
 
-      const perFigure = FIGURES.map(f => {
-        const t = computeTotals(f.schedule);
-        return {
-          ...f,
-          sleep: t['Sleep'],
-          work: t['Deep Work'],
-          exercise: t['Exercise'],
-          leisure: t['Leisure'],
-          meals: t['Meals'],
-          wake: getWakeHour(f.schedule),
-        };
-      });
+      const perFigure = FIGURES.map(analyzeFigureMetrics);
 
       // 1. 5-Category Central Tendency & Dispersion Strip
       const catDefs = [
@@ -2285,6 +2499,420 @@
           <div class="font-mono text-xs ${ex.color} mt-1">${ex.stat} &middot; ${escapeHtml(ex.fig.profession)}</div>
         </button>
       `).join('');
+
+      // 12. Deep Work Session Architecture (Blocks per Day & Longest Unbroken Sprint)
+      const avgSprint = calcStats(perFigure.filter(x => x.longestSprint > 0).map(x => x.longestSprint)).mean;
+      const splitPct = Math.round((perFigure.filter(x => x.workBlockCount >= 2).length / N) * 100);
+      document.getElementById('stats-sprint-callout').textContent = `Avg longest sprint: ${avgSprint.toFixed(1)}h · ${splitPct}% use 2+ blocks`;
+      if (hasChart) {
+        destroyChart('workBlocks');
+        const blockLabels = ['0 (Athletic/Other)', '1 Single Block', '2 Split Blocks', '3+ Blocks'];
+        const blockData = [
+          perFigure.filter(x => x.workBlockCount === 0).length,
+          perFigure.filter(x => x.workBlockCount === 1).length,
+          perFigure.filter(x => x.workBlockCount === 2).length,
+          perFigure.filter(x => x.workBlockCount >= 3).length,
+        ];
+        statsCharts.workBlocks = new Chart(document.getElementById('chart-work-blocks'), {
+          type: 'bar',
+          data: {
+            labels: blockLabels,
+            datasets: [{ label: 'Figures', data: blockData, backgroundColor: CATEGORY_META['Deep Work'].color, borderRadius: 0 }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 13. First Deep Work Start Time & Wake-to-Work Latency
+      const validLatency = perFigure.filter(x => x.wakeToWork !== null && x.wakeToWork <= 12);
+      const medLatency = calcStats(validLatency.map(x => x.wakeToWork)).median;
+      document.getElementById('stats-latency-callout').textContent = `Median wake-to-work lag: ${medLatency.toFixed(1)}h`;
+      if (hasChart) {
+        destroyChart('firstWork');
+        const fwBuckets = [
+          { label: '<6 AM', test: h => h !== null && h < 6 },
+          { label: '6–8 AM', test: h => h !== null && h >= 6 && h < 8 },
+          { label: '8–9 AM', test: h => h !== null && h >= 8 && h < 9 },
+          { label: '9–10 AM', test: h => h !== null && h >= 9 && h < 10 },
+          { label: '10a–12p', test: h => h !== null && h >= 10 && h < 12 },
+          { label: '12 PM+', test: h => h !== null && h >= 12 },
+        ];
+        statsCharts.firstWork = new Chart(document.getElementById('chart-first-work'), {
+          type: 'bar',
+          data: {
+            labels: fwBuckets.map(b => b.label),
+            datasets: [{ label: 'Figures', data: fwBuckets.map(b => perFigure.filter(x => b.test(x.firstWork)).length), backgroundColor: '#111110', borderRadius: 0 }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 14. Work-to-Sleep Ratio Distribution
+      const ratioMean = calcStats(perFigure.map(x => x.workSleepRatio)).mean;
+      document.getElementById('stats-ratio-callout').textContent = `Mean ratio: ${ratioMean.toFixed(2)}×`;
+      if (hasChart) {
+        destroyChart('ratio');
+        const ratioBins = [
+          { label: '<0.5×', test: r => r < 0.5 },
+          { label: '0.5–0.8×', test: r => r >= 0.5 && r < 0.8 },
+          { label: '0.8–1.1×', test: r => r >= 0.8 && r < 1.1 },
+          { label: '1.1–1.5×', test: r => r >= 1.1 && r < 1.5 },
+          { label: '1.5×+', test: r => r >= 1.5 },
+        ];
+        statsCharts.ratio = new Chart(document.getElementById('chart-work-sleep-ratio'), {
+          type: 'bar',
+          data: {
+            labels: ratioBins.map(b => b.label),
+            datasets: [{ label: 'Figures', data: ratioBins.map(b => perFigure.filter(x => b.test(x.workSleepRatio)).length), backgroundColor: '#7A475D', borderRadius: 0 }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 15. Primary Bedtime Distribution
+      const bedBins = [
+        { label: '<9:30p', test: b => b >= 17 && b < 21.5 },
+        { label: '9:30–10:30p', test: b => b >= 21.5 && b < 22.5 },
+        { label: '10:30–11:30p', test: b => b >= 22.5 && b < 23.5 },
+        { label: '11:30p–1a', test: b => (b >= 23.5 && b <= 24) || (b >= 0 && b < 1) },
+        { label: '1a–3a', test: b => b >= 1 && b < 3 },
+        { label: '3a+', test: b => b >= 3 && b < 17 },
+      ];
+      const before11Pct = Math.round((perFigure.filter(x => x.bedtime >= 17 && x.bedtime <= 23).length / N) * 100);
+      document.getElementById('stats-bedtime-callout').textContent = `${before11Pct}% in bed by 11:00 PM`;
+      if (hasChart) {
+        destroyChart('bedtime');
+        statsCharts.bedtime = new Chart(document.getElementById('chart-bedtime-dist'), {
+          type: 'bar',
+          data: {
+            labels: bedBins.map(b => b.label),
+            datasets: [{ label: 'Figures', data: bedBins.map(b => perFigure.filter(x => b.test(x.bedtime)).length), backgroundColor: CATEGORY_META['Sleep'].color, borderRadius: 0 }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { display: false }, ticks: { font: monoFont, color: tickColor } },
+              y: { beginAtZero: true, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+            },
+          },
+        });
+      }
+
+      // 16. 24-Hour Focus & Movement Density Heatmap
+      const nonAthletes = perFigure.filter(x => x.profession !== 'Athlete');
+      const nonAthExPct = Math.round((nonAthletes.filter(x => x.exercise > 0).length / (nonAthletes.length || 1)) * 100);
+      document.getElementById('stats-nonathlete-ex-callout').textContent = `${nonAthExPct}% of non-athletes exercise/walk daily`;
+      const makeHeatRow = (label, arr, hex) => {
+        const maxV = Math.max(...arr, 1);
+        return `
+          <div class="space-y-1">
+            <div class="flex justify-between font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+              <span>${label}</span>
+              <span>Peak: ${maxV}%</span>
+            </div>
+            <div class="grid grid-cols-12 sm:grid-cols-24 gap-px bg-rule border border-rule">
+              ${arr.map((v, hr) => {
+                const alpha = Math.max(0.06, v / maxV);
+                return `<div class="h-8 flex flex-col items-center justify-center font-mono text-[9px]" style="background:${hex}; opacity:${alpha.toFixed(2)}; color:${alpha > 0.45 ? '#FFFFFF' : '#111110'}" title="${pad2(hr)}:00 — ${v}%">${hr % 3 === 0 ? pad2(hr) : ''}</div>`;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      };
+      document.getElementById('stats-heatmap-strip').innerHTML =
+        makeHeatRow('Deep Work Density (00–23h)', catCurves['Deep Work'], CATEGORY_META['Deep Work'].color) +
+        makeHeatRow('Exercise & Walking Density (00–23h)', catCurves['Exercise'], CATEGORY_META['Exercise'].color);
+
+      // 17. Habit Impact Analysis Table
+      const impactHabits = ['Daily Walker', 'Napper', 'Coffee Drinker', 'Early Riser', 'Night Writer', 'Strict Schedule', 'Physical Training', 'Journaling', 'Reading Ritual'];
+      const impactRows = impactHabits.map(h => {
+        const withH = perFigure.filter(x => x.habits.includes(h));
+        const withoutH = perFigure.filter(x => !x.habits.includes(h));
+        const avg = (arr, k) => arr.length ? arr.reduce((a, b) => a + b[k], 0) / arr.length : 0;
+        const dWork = avg(withH, 'work') - avg(withoutH, 'work');
+        const dSleep = avg(withH, 'sleep') - avg(withoutH, 'sleep');
+        const dEx = avg(withH, 'exercise') - avg(withoutH, 'exercise');
+        return { h, n: withH.length, avgWork: avg(withH, 'work'), dWork, avgSleep: avg(withH, 'sleep'), dSleep, dEx };
+      });
+      const fmtDelta = d => `${d >= 0 ? '+' : ''}${d.toFixed(2)}h`;
+      document.getElementById('stats-habit-impact-table').innerHTML = `
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-ink font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">
+              <th class="py-2.5 pr-4">Habit</th>
+              <th class="py-2.5 px-3">Count</th>
+              <th class="py-2.5 px-3">Avg Work</th>
+              <th class="py-2.5 px-3">&Delta; Work</th>
+              <th class="py-2.5 px-3">Avg Sleep</th>
+              <th class="py-2.5 px-3">&Delta; Sleep</th>
+              <th class="py-2.5 pl-3">&Delta; Exercise</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-rule font-mono">
+            ${impactRows.map(r => `
+              <tr>
+                <td class="py-2.5 pr-4 font-sans font-medium text-ink">${escapeHtml(r.h)}</td>
+                <td class="py-2.5 px-3 text-muted">${r.n}</td>
+                <td class="py-2.5 px-3 text-ink">${r.avgWork.toFixed(1)}h</td>
+                <td class="py-2.5 px-3 ${r.dWork >= 0 ? 'text-catExercise' : 'text-catWork'}">${fmtDelta(r.dWork)}</td>
+                <td class="py-2.5 px-3 text-ink">${r.avgSleep.toFixed(1)}h</td>
+                <td class="py-2.5 px-3 ${r.dSleep >= 0 ? 'text-catSleep' : 'text-catWork'}">${fmtDelta(r.dSleep)}</td>
+                <td class="py-2.5 pl-3 ${r.dEx >= 0 ? 'text-catExercise' : 'text-muted'}">${fmtDelta(r.dEx)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+
+      // 18. Percentile Reference Table
+      const pctDefs = [
+        { label: 'Sleep (hrs)', vals: perFigure.map(x => x.sleep) },
+        { label: 'Deep Work (hrs)', vals: perFigure.map(x => x.work) },
+        { label: 'Longest Sprint (hrs)', vals: perFigure.filter(x => x.longestSprint > 0).map(x => x.longestSprint) },
+        { label: 'Exercise (hrs)', vals: perFigure.map(x => x.exercise) },
+        { label: 'Leisure (hrs)', vals: perFigure.map(x => x.leisure) },
+        { label: 'Meals (hrs)', vals: perFigure.map(x => x.meals) },
+        { label: 'Wake Hour', vals: perFigure.map(x => x.wake), isTime: true },
+      ];
+      document.getElementById('stats-percentile-table').innerHTML = `
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-ink font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">
+              <th class="py-2.5 pr-3">Metric</th>
+              <th class="py-2.5 px-2">P10</th>
+              <th class="py-2.5 px-2">P25</th>
+              <th class="py-2.5 px-2 text-ink">P50 (Med)</th>
+              <th class="py-2.5 px-2">P75</th>
+              <th class="py-2.5 pl-2">P90</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-rule font-mono">
+            ${pctDefs.map(d => {
+              const srt = d.vals.slice().sort((a, b) => a - b);
+              const fmt = v => d.isTime ? formatHour(v) : v.toFixed(1) + 'h';
+              return `
+                <tr>
+                  <td class="py-2.5 pr-3 font-sans font-medium text-ink">${d.label}</td>
+                  <td class="py-2.5 px-2 text-muted">${fmt(calcPercentile(srt, 10))}</td>
+                  <td class="py-2.5 px-2 text-muted">${fmt(calcPercentile(srt, 25))}</td>
+                  <td class="py-2.5 px-2 text-ink font-medium">${fmt(calcPercentile(srt, 50))}</td>
+                  <td class="py-2.5 px-2 text-muted">${fmt(calcPercentile(srt, 75))}</td>
+                  <td class="py-2.5 pl-2 text-muted">${fmt(calcPercentile(srt, 90))}</td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      `;
+
+      // 19. Primary Clocked vs Biographical Sensitivity Check
+      const tiers = ['Primary Clocked', 'Biographical Record'].map(tier => {
+        const sub = perFigure.filter(x => x.verificationTier === tier);
+        const n = sub.length || 1;
+        return {
+          tier,
+          n: sub.length,
+          sleep: (sub.reduce((a, b) => a + b.sleep, 0) / n).toFixed(2),
+          work: (sub.reduce((a, b) => a + b.work, 0) / n).toFixed(2),
+          ex: (sub.reduce((a, b) => a + b.exercise, 0) / n).toFixed(2),
+        };
+      });
+      document.getElementById('stats-robustness-table').innerHTML = `
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-ink font-mono text-[10px] uppercase tracking-[0.12em] text-subtle">
+              <th class="py-2 pr-2">Tier</th>
+              <th class="py-2 px-2">N</th>
+              <th class="py-2 px-2">Sleep</th>
+              <th class="py-2 px-2">Work</th>
+              <th class="py-2 pl-2">Ex.</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-rule font-mono">
+            ${tiers.map(t => `
+              <tr>
+                <td class="py-2.5 pr-2 font-sans font-medium text-ink">${escapeHtml(t.tier)}</td>
+                <td class="py-2.5 px-2 text-muted">${t.n}</td>
+                <td class="py-2.5 px-2 text-catSleep">${t.sleep}h</td>
+                <td class="py-2.5 px-2 text-catWork">${t.work}h</td>
+                <td class="py-2.5 pl-2 text-catExercise">${t.ex}h</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    // =========================================================================
+    // THIRD PANEL: DATA-DRIVEN LESSONS VIEW
+    // =========================================================================
+    function renderLessonsView() {
+      const N = FIGURES.length;
+      document.getElementById('lessons-sample-n').textContent = String(N);
+      const pf = FIGURES.map(analyzeFigureMetrics);
+
+      const sleepSt = calcStats(pf.map(x => x.sleep));
+      const workSt = calcStats(pf.map(x => x.work));
+      const leisureSt = calcStats(pf.map(x => x.leisure));
+      const sprintSt = calcStats(pf.filter(x => x.longestSprint > 0).map(x => x.longestSprint));
+      const sleep7PlusPct = Math.round((pf.filter(x => x.sleep >= 7).length / N) * 100);
+      const sweetSpotWorkPct = Math.round((pf.filter(x => x.work >= 4 && x.work <= 9).length / N) * 100);
+      const splitBlocksPct = Math.round((pf.filter(x => x.workBlockCount >= 2).length / N) * 100);
+      const nonAth = pf.filter(x => x.profession !== 'Athlete');
+      const nonAthMovePct = Math.round((nonAth.filter(x => x.exercise > 0).length / (nonAth.length || 1)) * 100);
+      const before10WorkPct = Math.round((pf.filter(x => x.firstWork !== null && x.firstWork <= 10).length / N) * 100);
+      const medLatency = calcStats(pf.filter(x => x.wakeToWork !== null && x.wakeToWork <= 12).map(x => x.wakeToWork)).median;
+
+      const avgByChrono = ch => {
+        const sub = pf.filter(x => x.chronotype === ch);
+        return sub.length ? (sub.reduce((a, b) => a + b.work, 0) / sub.length).toFixed(1) : '0.0';
+      };
+      const strictPct = Math.round((pf.filter(x => x.habits.includes('Strict Schedule')).length / N) * 100);
+
+      // Headline synthesis KPI strip
+      document.getElementById('lessons-headline-strip').innerHTML = [
+        { k: 'Sleep >= 7 Hours', v: `${sleep7PlusPct}%`, sub: `Median ${sleepSt.median.toFixed(1)}h across all ${N}` },
+        { k: 'Work 4–9 Hours/Day', v: `${sweetSpotWorkPct}%`, sub: `Median ${workSt.median.toFixed(1)}h deep work` },
+        { k: 'Split Work Blocks', v: `${splitBlocksPct}%`, sub: `Avg longest sprint ${sprintSt.mean.toFixed(1)}h` },
+        { k: 'Non-Athletes Who Move', v: `${nonAthMovePct}%`, sub: 'Daily walks or training' },
+      ].map(item => `
+        <div class="bg-pure p-5">
+          <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">${item.k}</div>
+          <div class="font-editorial text-3xl sm:text-4xl text-ink mt-1.5">${item.v}</div>
+          <div class="font-mono text-[10px] text-muted mt-1">${item.sub}</div>
+        </div>
+      `).join('');
+
+      const lessons = [
+        {
+          num: '01',
+          tag: 'Sustainable Output',
+          stat: `${sweetSpotWorkPct}% work 4–9 hrs · Median ${workSt.median.toFixed(1)}h`,
+          title: 'Depth beats marathon hours.',
+          body: `Across all ${N} figures, extreme 14-hour workdays are the exception, not the rule. The overwhelming majority produce their enduring work inside a 4-to-9-hour window—and many of the most prolific writers and scientists (Darwin, Woolf, Poincaré, Cather) stopped cleanly after 3 to 5 hours of peak cognitive heat.`,
+          takeaway: 'Guard 4 hours of uninterrupted, high-intensity focus before chasing longer office hours.',
+          exemplars: ['charles-darwin', 'virginia-woolf', 'henri-poincare'],
+        },
+        {
+          num: '02',
+          tag: 'Recovery First',
+          stat: `${sleep7PlusPct}% sleep >= 7 hrs · Median ${sleepSt.median.toFixed(1)}h`,
+          title: 'Sleep is infrastructure, not wasted time.',
+          body: `Despite popular myths of sleepless geniuses, ${sleep7PlusPct}% of the archive sleeps at least 7 hours a day (median ${sleepSt.median.toFixed(1)} hours). High performers across eras—from Kant's ironclad 10 PM bedtime to Einstein's 9–10 hours, Jeff Bezos's 8-hour rule, and Roger Federer's 10+ hours—treated sleep as the foundation of judgment.`,
+          takeaway: 'Protect a fixed bedtime first; build your work blocks backward from full recovery.',
+          exemplars: ['albert-einstein', 'jeff-bezos', 'roger-federer'],
+        },
+        {
+          num: '03',
+          tag: 'The Golden Window',
+          stat: `${before10WorkPct}% start deep work by 10 AM · ${medLatency.toFixed(1)}h median lag`,
+          title: 'Begin your hardest work before the world interrupts.',
+          body: `${before10WorkPct}% of documented figures launch their primary work session by 10:00 AM, with a median lag of just ${medLatency.toFixed(1)} hours after waking. Starting before meetings, mail, or domestic obligations arrive turns morning quiet into a structural advantage.`,
+          takeaway: 'Place your single most demanding creative or analytical task in your first 90 minutes of work.',
+          exemplars: ['maya-angelou', 'haruki-murakami', 'anthony-trollope'],
+        },
+        {
+          num: '04',
+          tag: 'Rhythmic Segmentation',
+          stat: `${splitBlocksPct}% use 2+ work blocks · ${sprintSt.mean.toFixed(1)}h avg sprint`,
+          title: 'Split the day into deliberate bursts.',
+          body: `Rather than grinding straight through from morning to evening, ${splitBlocksPct}% of figures divide Deep Work into two or more distinct blocks separated by meals, walks, or naps. The average longest unbroken sprint is ${sprintSt.mean.toFixed(1)} hours—long enough for deep immersion, short enough to prevent diminishing returns.`,
+          takeaway: 'Structure work into 2 focused blocks separated by a real physical or mental reset.',
+          exemplars: ['simone-de-beauvoir', 'roald-dahl', 'benjamin-franklin'],
+        },
+        {
+          num: '05',
+          tag: 'Embodied Cognition',
+          stat: `${nonAthMovePct}% of non-athletes walk or train daily`,
+          title: 'Walking is part of the work, not a break from it.',
+          body: `Even excluding professional athletes, ${nonAthMovePct}% of writers, scientists, philosophers, and composers embed daily physical movement into their schedule—most commonly a 1-to-3-hour afternoon walk. Darwin's Sandwalk, Dickens's 10-mile London walks, Beethoven's forest sketchbooks, and Nietzsche's alpine trails were active problem-solving engines.`,
+          takeaway: 'Schedule a phone-free afternoon walk to unlock ideas your desk cannot solve.',
+          exemplars: ['charles-dickens', 'friedrich-nietzsche', 'ludwig-van-beethoven'],
+        },
+        {
+          num: '06',
+          tag: 'Chronotype Alignment',
+          stat: `Early Birds ${avgByChrono('Early Bird')}h · Night Owls ${avgByChrono('Night Owl')}h · Biphasic ${avgByChrono('Biphasic Sleeper')}h`,
+          title: 'Consistency matters far more than waking at 5 AM.',
+          body: `Early Birds dominate the archive in headcount, yet Night Owls (${avgByChrono('Night Owl')}h avg work) and Biphasic Sleepers (${avgByChrono('Biphasic Sleeper')}h avg work) match or surpass Early Birds (${avgByChrono('Early Bird')}h) in daily output. What unites them is not the clock hour—it is defending the exact same quiet hours every single day.`,
+          takeaway: 'Stop fighting your biology; pick the 4–6 quietest hours for your chronotype and defend them daily.',
+          exemplars: ['marcel-proust', 'winston-churchill', 'honore-de-balzac'],
+        },
+        {
+          num: '07',
+          tag: 'Zero Friction',
+          stat: `${strictPct}% follow a Strict Schedule ritual`,
+          title: 'Use external rituals to bypass willpower.',
+          body: `${strictPct}% of the archive relies on strict, repeatable external cues—Maya Angelou's bare hotel room, Twyla Tharp's 5:30 AM cab, Beethoven's 60 counted coffee beans, or Raymond Chandler's "write or do nothing" desk rule. When starting becomes automatic, inspiration is no longer required.`,
+          takeaway: 'Attach the start of deep work to one small, physical cue (same desk, drink, or time) every day.',
+          exemplars: ['twyla-tharp', 'wh-auden', 'raymond-chandler'],
+        },
+        {
+          num: '08',
+          tag: 'Subconscious Incubation',
+          stat: `Mean ${leisureSt.mean.toFixed(1)}h daily leisure & evening wind-down`,
+          title: 'Stop cleanly so your mind can incubate overnight.',
+          body: `Across 250 lives, intentional leisure averages ${leisureSt.mean.toFixed(1)} hours per day—music, reading, backgammon, painting, or family dinners. Figures like Poincaré, Marshall, and Einstein deliberately refused to work after dinner, letting their unconscious mind solve problems overnight.`,
+          takeaway: 'Set a hard shutdown time each evening and replace work with analog, restorative leisure.',
+          exemplars: ['george-c-marshall', 'carl-jung', 'thomas-mann'],
+        },
+      ];
+
+      document.getElementById('lessons-cards-grid').innerHTML = lessons.map(l => {
+        const chips = l.exemplars
+          .map(id => FIGURES.find(f => f.id === id))
+          .filter(Boolean)
+          .map(f => `<button type="button" data-open-detail="${escapeHtml(f.id)}" class="font-mono text-[10px] uppercase tracking-[0.08em] px-2.5 py-1 border border-rule bg-pure hover:border-ink hover:text-catWork transition-colors">${escapeHtml(f.name)} &rarr;</button>`)
+          .join('');
+        return `
+          <article class="border-r border-b border-rule bg-paper hover:bg-pure p-6 sm:p-8 flex flex-col justify-between gap-5 transition-colors">
+            <div class="space-y-3.5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">${l.num} / ${escapeHtml(l.tag)}</span>
+                <span class="font-mono text-[10px] px-2 py-0.5 border border-catWork/40 text-catWork bg-catWork/5">${escapeHtml(l.stat)}</span>
+              </div>
+              <h2 class="font-editorial text-2xl sm:text-3xl font-normal tracking-[-0.02em] text-ink leading-tight">${escapeHtml(l.title)}</h2>
+              <p class="text-sm text-muted leading-relaxed">${escapeHtml(l.body)}</p>
+            </div>
+            <div class="space-y-3.5 pt-4 border-t border-rule/80">
+              <div class="pl-3.5 border-l-2 border-ink text-xs text-ink leading-relaxed">
+                <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-subtle block mb-0.5">Actionable Rule</span>
+                ${escapeHtml(l.takeaway)}
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="font-mono text-[9px] uppercase tracking-[0.14em] text-subtle mr-1">Exemplars</span>
+                ${chips}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
     }
 
     function initStats() {
@@ -2387,6 +3015,11 @@
         state.onlySaved = !state.onlySaved;
         renderFilters();
         renderDirectory();
+      });
+      document.getElementById('lessons-try-overlay-btn').addEventListener('click', () => {
+        state.userOverlayEnabled = true;
+        switchView('atlas');
+        renderComparison();
       });
       document.getElementById('back-to-top-btn').addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2551,6 +3184,8 @@
     }, 60000);
     if (window.location.hash === '#stats') {
       switchView('stats');
+    } else if (window.location.hash === '#lessons') {
+      switchView('lessons');
     } else if (window.location.hash && window.location.hash.startsWith('#figure=')) {
       const targetId = decodeURIComponent(window.location.hash.slice(8));
       if (FIGURES.some(f => f.id === targetId)) openDetailDrawer(targetId);
