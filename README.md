@@ -1,24 +1,19 @@
-# Horologium — Daily Routines & Work Habits Atlas
+# Horologium
 
-A self-contained static web application showcasing the documented 24-hour routines, work habits, quotes, and source citations of **250 historical and modern figures** across writers, scientists, philosophers, military leaders, athletes, tech founders, and artists.
+**An editorial atlas of daily routines and work habits across history.**
 
-## What's Included
-- `index.html` — Complete self-contained application (HTML, Tailwind CSS, vanilla JS, and all 250 audited schedules).
-- `_headers` — Security and cache headers for Cloudflare Pages.
-- `wrangler.jsonc` — Ready-to-use config if deploying via Cloudflare Wrangler CLI.
-- `.gitignore` — Clean Git defaults.
+Horologium showcases the documented 24-hour schedules, work rituals, and biographical context of **250 historical and modern figures**—spanning writers, scientists, philosophers, military leaders, athletes, tech founders, and artists.
 
-## Deploy via GitHub + Cloudflare Pages (No Build Step)
-1. **Unzip** this archive on your computer.
-2. **Create a new repository** on GitHub and upload all files from the unzipped folder (`index.html`, `_headers`, `wrangler.jsonc`, `README.md`, `.gitignore`) to the root of your `main` branch.
-3. In the **Cloudflare Dashboard**, go to **Workers & Pages → Create → Pages → Connect to Git**.
-4. Select your new GitHub repository and use these build settings:
-   - **Framework preset:** `None`
-   - **Build command:** *(leave empty)*
-   - **Build output directory:** `/` *(or leave empty)*
-5. Click **Save and Deploy**. Your site will be live on `*.pages.dev` within seconds.
+## Features
 
-## Optional: Deploy via Wrangler CLI
-```bash
-npx wrangler deploy
-```
+- **Filterable Directory** — Search and filter all 250 profiles by discipline, chronotype (*Early Bird*, *Night Owl*, *Biphasic Sleeper*), daily habits, and **Source Fidelity** (*Primary Clocked* vs. *Biographical Record*), or press `/` to jump straight to search.
+- **24-Hour Timeline Comparison** — Stack up to three figures side by side along a synchronized 24-hour ruler with a live **NOW** clock indicator, **Shuffle 3** randomizer, and curated comparison trios.
+- **Personal Schedule Overlay** — Toggle your own wake, work, and sleep times directly onto the timeline to measure live Deep Work and Sleep overlap against any figure, and export your custom routine as an `.ics` file.
+- **Interactive Category Highlighting** — Click any activity swatch in the masthead (*Sleep*, *Deep Work*, *Exercise*, *Leisure*, *Meals*) to isolate that category across the entire archive.
+- **Detail Drawer & Primary Citations** — Inspect any figure's exact hourly breakdown, work-ethic quote, historical context, and primary biographical or interview source, with keyboard navigation (`←` / `→`) and URL hash deep-linking.
+- **Calendar Export (`.ics`)** — Generate and download RFC 5545 `.ics` calendar files for any routine to import into Google Calendar or Apple Calendar.
+- **Saved Bookmarks** — Star favorite routines to revisit them anytime, persisted locally in the browser.
+
+## Tech Stack
+
+Built as a single self-contained static site using HTML, Tailwind CSS, and vanilla JavaScript.
