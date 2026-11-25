@@ -18,7 +18,3 @@ Horologium showcases the documented 24-hour schedules, work rituals, portraits, 
 ## Tech Stack
 
 Built as a single self-contained static site using HTML, Tailwind CSS, Chart.js, and vanilla JavaScript.
-
-## License & Author
-
-Built by [Fangyuan Cao](https://fangyuancao.me) in November 2026. Open source under the MIT License.
