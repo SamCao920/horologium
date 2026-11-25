@@ -112,7 +112,7 @@
       <!-- Interactive High-Contrast Minimalist Legend (click to isolate category) -->
       <div id="legend-bar" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono uppercase tracking-[0.1em] text-muted" role="group" aria-label="Highlight activity category">
         <button type="button" data-highlight-cat="Sleep" class="legend-btn inline-flex items-center gap-1.5 px-1.5 py-0.5 border border-transparent hover:border-rule transition-colors"><span class="w-2.5 h-2.5 bg-catSleep inline-block"></span>Sleep</button>
-        <button type="button" data-highlight-cat="Deep Work" class="legend-btn inline-flex items-center gap-1.5 px-1.5 py-0.5 border border-transparent hover:border-rule transition-colors"><span class="w-2.5 h-2.5 bg-catWork inline-block"></span>Deep Work</button>
+        <button type="button" data-highlight-cat="Deep Work" class="legend-btn inline-flex items-center gap-1.5 px-1.5 py-0.5 border border-transparent hover:border-rule transition-colors"><span class="w-2.5 h-2.5 bg-catWork inline-block"></span>Work Hours</button>
         <button type="button" data-highlight-cat="Exercise" class="legend-btn inline-flex items-center gap-1.5 px-1.5 py-0.5 border border-transparent hover:border-rule transition-colors"><span class="w-2.5 h-2.5 bg-catExercise inline-block"></span>Exercise</button>
         <button type="button" data-highlight-cat="Leisure" class="legend-btn inline-flex items-center gap-1.5 px-1.5 py-0.5 border border-transparent hover:border-rule transition-colors"><span class="w-2.5 h-2.5 bg-catLeisure inline-block"></span>Leisure</button>
         <button type="button" data-highlight-cat="Meals" class="legend-btn inline-flex items-center gap-1.5 px-1.5 py-0.5 border border-transparent hover:border-rule transition-colors"><span class="w-2.5 h-2.5 bg-catMeals inline-block"></span>Meals</button>
@@ -133,7 +133,7 @@
           How history&rsquo;s great minds <em class="italic font-normal">architect</em> their day.
         </h1>
         <p class="max-w-xl text-sm sm:text-[15px] text-muted leading-relaxed">
-          A sourced archive of <span id="stat-total-figures" class="text-ink font-medium">250</span> writers, scientists, philosophers, statesmen, and artists&mdash;reconstructed from Mason Currey&rsquo;s <em>Daily Rituals</em>, primary diaries, and interviews. Core wake, work, and sleep anchors are sourced; surrounding transition blocks are estimated.
+          A sourced archive of <span id="stat-total-figures" class="text-ink font-medium">250</span> writers, scientists, philosophers, statesmen, and artists&mdash;reconstructed from Mason Currey&rsquo;s <em>Daily Rituals</em>, primary diaries, and interviews. <strong>Work Hours</strong> denotes primary craft, lab, study, or statecraft blocks as described in sources. Core anchors are sourced; surrounding transition blocks are estimated.
         </p>
       </div>
 
@@ -157,7 +157,7 @@
     <!-- FRONT-AND-CENTER EMPIRICAL FINDINGS BAND (COMPUTED LIVE FROM TIME-ANCHORED SUBSET) -->
     <section id="homepage-findings" class="space-y-3">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-catWork">What the Data Shows &nbsp;/&nbsp; Time-Anchored Subset (n = 144)</span>
+        <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-catWork">Patterns in This Sample &nbsp;/&nbsp; Time-Anchored Subset (n = 144, non-random historical sample)</span>
         <div class="flex items-center gap-4 font-mono text-[11px]">
           <button type="button" data-switch-view="stats" class="text-ink hover:text-catWork underline decoration-rule hover:decoration-catWork transition-colors">Full Statistics &rarr;</button>
           <button type="button" data-switch-view="lessons" class="text-ink hover:text-catWork underline decoration-rule hover:decoration-catWork transition-colors">Read Lessons &rarr;</button>
@@ -356,7 +356,7 @@
             <label for="sort-select" class="font-mono text-[10px] uppercase tracking-[0.14em] text-subtle hidden sm:inline">Sort</label>
             <select id="sort-select" class="text-xs font-mono bg-pure border border-rule focus:border-ink px-3 py-2.5 text-ink focus:outline-none">
               <option value="name">Name (A–Z)</option>
-              <option value="deepWork">Deep Work ↓</option>
+              <option value="deepWork">Work Hours ↓</option>
               <option value="sleep">Sleep ↓</option>
               <option value="wake">Wake Time ↑</option>
               <option value="era">Era</option>
@@ -442,13 +442,13 @@
       <!-- Headline Repeatable Finding + Methodology Disclosure -->
       <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div class="lg:col-span-7 bg-pure border-l-4 border-catWork border-t border-r border-b border-rule p-5 space-y-2">
-          <div class="font-mono text-[10px] uppercase tracking-[0.16em] text-catWork">Headline Cross-Discipline Finding</div>
+          <div class="font-mono text-[10px] uppercase tracking-[0.16em] text-catWork">Sample Comparison (Medians &amp; Means)</div>
           <p id="stats-headline-finding" class="font-editorial text-xl sm:text-2xl text-ink leading-snug"></p>
         </div>
         <div class="lg:col-span-5 bg-paperAlt/60 border border-rule p-5 space-y-1.5 text-xs text-muted leading-relaxed">
           <div class="font-mono text-[10px] uppercase tracking-[0.16em] text-ink">Methodology &amp; Data Provenance</div>
           <p>
-            Builds on Mason Currey&rsquo;s <em>Daily Rituals</em> (2013) and <em>Women at Work</em> (2019), expanded with primary diaries, <em>The Paris Review</em>, and modern biographies. Primary sources typically record core wake, work, exercise, and sleep anchors; surrounding meal and transition blocks are conservatively estimated to complete each 24-hour bar.
+            Builds on Mason Currey&rsquo;s <em>Daily Rituals</em> (2013) and <em>Women at Work</em> (2019), expanded with primary diaries, <em>The Paris Review</em>, and biographies. <strong>Work Hours</strong> captures primary craft, lab, study, or statecraft blocks (which vary in scope across fields). Because published schedules are a non-random historical sample skewed toward notable routines, medians and ranges are reported alongside means.
           </p>
         </div>
       </section>
@@ -476,7 +476,7 @@
           <div class="flex items-baseline justify-between gap-2 border-b border-rule pb-3">
             <div>
               <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">03 / Distribution</span>
-              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Deep Work Duration Histogram</h2>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Work Hours Duration Histogram</h2>
             </div>
             <span id="stats-work-callout" class="font-mono text-[11px] text-catWork"></span>
           </div>
@@ -502,7 +502,7 @@
           <div class="flex items-baseline justify-between gap-2 border-b border-rule pb-3">
             <div>
               <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">05 / Correlation</span>
-              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Sleep vs. Deep Work (Active Sample)</h2>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Sleep vs. Work Hours (Active Sample)</h2>
             </div>
             <span id="stats-corr-callout" class="font-mono text-[11px] text-ink"></span>
           </div>
@@ -577,7 +577,7 @@
           <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
             <div>
               <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">12 / Session Architecture</span>
-              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Deep Work Blocks per Day</h2>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Work-Hour Blocks per Day</h2>
             </div>
             <span id="stats-sprint-callout" class="font-mono text-[11px] text-catWork"></span>
           </div>
@@ -588,7 +588,7 @@
           <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
             <div>
               <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">13 / Ignition Window</span>
-              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">When Does First Deep Work Begin?</h2>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">When Do First Work Hours Begin?</h2>
             </div>
             <span id="stats-latency-callout" class="font-mono text-[11px] text-ink"></span>
           </div>
@@ -602,7 +602,7 @@
           <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
             <div>
               <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">14 / Output-to-Recovery Ratio</span>
-              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Deep Work / Sleep Ratio</h2>
+              <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">Work Hours / Sleep Ratio</h2>
             </div>
             <span id="stats-ratio-callout" class="font-mono text-[11px] text-muted"></span>
           </div>
@@ -626,7 +626,7 @@
         <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-3">
           <div>
             <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">16 / Focus Intensity Heatmap</span>
-            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">24-Hour Deep Work &amp; Movement Density</h2>
+            <h2 class="font-editorial text-2xl font-normal text-ink mt-0.5">24-Hour Work &amp; Movement Density</h2>
           </div>
           <span id="stats-nonathlete-ex-callout" class="font-mono text-[11px] text-catExercise"></span>
         </div>
@@ -816,7 +816,7 @@
     // =========================================================================
     const CATEGORY_META = {
       'Sleep':     { color: '#18283E', label: 'Sleep' },
-      'Deep Work': { color: '#C83E2B', label: 'Deep Work' },
+      'Deep Work': { color: '#C83E2B', label: 'Work Hours' },
       'Exercise':  { color: '#1D684E', label: 'Exercise' },
       'Leisure':   { color: '#D49A2A', label: 'Leisure' },
       'Meals':     { color: '#7A475D', label: 'Meals' },
@@ -1640,7 +1640,7 @@
           <div class="p-3 bg-pure">
             <div class="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-subtle">
               <span class="w-2 h-2 inline-block" style="background:${color}"></span>
-              <span>${cat === 'Deep Work' ? 'Work' : cat}</span>
+              <span>${cat === 'Deep Work' ? 'Work Hrs' : cat}</span>
             </div>
             <div class="mt-1.5 font-editorial text-xl text-ink">${hrs}h <span class="font-mono text-[10px] text-subtle">${pct}%</span></div>
           </div>
@@ -1656,7 +1656,7 @@
             <div class="min-w-0 flex-1">
               <div class="flex flex-wrap items-baseline justify-between gap-2">
                 <span class="font-mono text-xs text-ink">${escapeHtml(formatRange(b.start, b.end))}</span>
-                <span class="font-mono text-[10px] uppercase tracking-[0.1em] text-subtle">${escapeHtml(b.category)} &middot; ${dur}</span>
+                <span class="font-mono text-[10px] uppercase tracking-[0.1em] text-subtle">${escapeHtml(b.category === 'Deep Work' ? 'Work Hours' : b.category)} &middot; ${dur}</span>
               </div>
               <p class="font-editorial text-lg text-ink leading-snug mt-0.5">${escapeHtml(b.title)}</p>
               <p class="text-xs text-muted mt-0.5 leading-relaxed">${escapeHtml(b.detail)}</p>
@@ -2142,13 +2142,16 @@
       const phEx = meanOf(ph, 'exercise');
       const diffW = Math.abs(scW - wrW).toFixed(1);
       const scopeLabel = state.statsScope === 'clocked' ? 'primary clock-logged' : (state.statsScope === 'canon' ? 'thinker & creator' : 'archived');
+      const wrMed = calcStats(wr.map(x => x.work)).median;
+      const scMed = calcStats(sc.map(x => x.work)).median;
+      const phExMed = calcStats(ph.map(x => x.exercise)).median;
       document.getElementById('stats-headline-finding').innerHTML =
-        `Across ${scoped.length} ${scopeLabel} figures, <strong>Science &amp; Medicine</strong> averages <strong>${scW.toFixed(1)}h</strong> of daily deep work vs. <strong>${wrW.toFixed(1)}h</strong> for <strong>Writers</strong> (&Delta; ${diffW}h), despite nearly identical sleep (${scS.toFixed(1)}h vs. ${wrS.toFixed(1)}h)&mdash;while <strong>Philosophers</strong> lead all non-athletic fields in daily walking &amp; exercise at <strong>${phEx.toFixed(1)}h/day</strong>.`;
+        `In this sample (${scoped.length} ${scopeLabel} entries), <strong>Science &amp; Medicine</strong> (n=${sc.length}, median <strong>${scMed.toFixed(1)}h</strong>, mean ${scW.toFixed(1)}h) records longer daily work hours than <strong>Writers</strong> (n=${wr.length}, median <strong>${wrMed.toFixed(1)}h</strong>, mean ${wrW.toFixed(1)}h)&mdash;likely reflecting broader lab/teaching hours vs. solo drafting&mdash;while <strong>Philosophers</strong> (n=${ph.length}, median <strong>${phExMed.toFixed(1)}h</strong>) record the most daily walking.`;
 
       // 1. 5-Category Central Tendency & Dispersion Strip
       const catDefs = [
         { key: 'sleep', label: 'Sleep', color: CATEGORY_META['Sleep'].color },
-        { key: 'work', label: 'Deep Work', color: CATEGORY_META['Deep Work'].color },
+        { key: 'work', label: 'Work Hours', color: CATEGORY_META['Deep Work'].color },
         { key: 'exercise', label: 'Exercise', color: CATEGORY_META['Exercise'].color },
         { key: 'leisure', label: 'Leisure', color: CATEGORY_META['Leisure'].color },
         { key: 'meals', label: 'Meals', color: CATEGORY_META['Meals'].color },
@@ -2272,7 +2275,7 @@
           }
         }
       }
-      document.getElementById('stats-peak-callout').textContent = `Peak Deep Work: ${formatHour(peakWorkHour)} (${peakWorkPct}% working)`;
+      document.getElementById('stats-peak-callout').textContent = `Peak Work Hours: ${formatHour(peakWorkHour)} (${peakWorkPct}% working)`;
       if (hasChart) {
         destroyChart('hourly');
         statsCharts.hourly = new Chart(document.getElementById('chart-hourly-curve'), {
@@ -2340,7 +2343,7 @@
             },
             scales: {
               x: { title: { display: true, text: 'Sleep (hrs)', font: monoFont, color: tickColor }, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
-              y: { title: { display: true, text: 'Deep Work (hrs)', font: monoFont, color: tickColor }, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
+              y: { title: { display: true, text: 'Work Hours (hrs)', font: monoFont, color: tickColor }, grid: { color: gridColor }, ticks: { font: monoFont, color: tickColor } },
             },
           },
         });
@@ -2405,7 +2408,7 @@
           data: {
             labels: profStats.map(p => p.prof),
             datasets: [
-              { label: 'Deep Work', data: profStats.map(p => +p.work.toFixed(1)), backgroundColor: CATEGORY_META['Deep Work'].color },
+              { label: 'Work Hours', data: profStats.map(p => +p.work.toFixed(1)), backgroundColor: CATEGORY_META['Deep Work'].color },
               { label: 'Sleep', data: profStats.map(p => +p.sleep.toFixed(1)), backgroundColor: CATEGORY_META['Sleep'].color },
               { label: 'Exercise', data: profStats.map(p => +p.exercise.toFixed(1)), backgroundColor: CATEGORY_META['Exercise'].color },
             ],
@@ -2443,7 +2446,7 @@
             labels: eraStats.map(e => `${e.era} (${e.n})`),
             datasets: [
               { label: 'Sleep', data: eraStats.map(e => e.sleep), borderColor: CATEGORY_META['Sleep'].color, tension: 0.2, borderWidth: 2 },
-              { label: 'Deep Work', data: eraStats.map(e => e.work), borderColor: CATEGORY_META['Deep Work'].color, tension: 0.2, borderWidth: 2 },
+              { label: 'Work Hours', data: eraStats.map(e => e.work), borderColor: CATEGORY_META['Deep Work'].color, tension: 0.2, borderWidth: 2 },
               { label: 'Exercise', data: eraStats.map(e => e.exercise), borderColor: CATEGORY_META['Exercise'].color, tension: 0.2, borderWidth: 2 },
             ],
           },
@@ -2540,7 +2543,7 @@
               <th class="py-2.5 pr-4">Profession</th>
               <th class="py-2.5 px-3">Count</th>
               <th class="py-2.5 px-3">Avg Sleep</th>
-              <th class="py-2.5 px-3">Avg Deep Work</th>
+              <th class="py-2.5 px-3">Avg Work Hrs</th>
               <th class="py-2.5 px-3">Avg Exercise</th>
               <th class="py-2.5 px-3">Early Birds</th>
               <th class="py-2.5 pl-3">Night Owls</th>
@@ -2568,7 +2571,7 @@
       const leastSleep = perFigure.slice().sort((a, b) => a.sleep - b.sleep)[0];
       const mostExercise = perFigure.slice().sort((a, b) => b.exercise - a.exercise)[0];
       const extremes = [
-        { label: 'Most Deep Work', fig: mostWork, stat: `${mostWork.work}h / day`, color: 'text-catWork' },
+        { label: 'Most Work Hours', fig: mostWork, stat: `${mostWork.work}h / day`, color: 'text-catWork' },
         { label: 'Most Sleep', fig: mostSleep, stat: `${mostSleep.sleep}h / day`, color: 'text-catSleep' },
         { label: 'Least Sleep', fig: leastSleep, stat: `${leastSleep.sleep}h / day`, color: 'text-ink' },
         { label: 'Most Exercise', fig: mostExercise, stat: `${mostExercise.exercise}h / day`, color: 'text-catExercise' },
@@ -2727,7 +2730,7 @@
         `;
       };
       document.getElementById('stats-heatmap-strip').innerHTML =
-        makeHeatRow('Deep Work Density (00–23h)', catCurves['Deep Work'], CATEGORY_META['Deep Work'].color) +
+        makeHeatRow('Work Hours Density (00–23h)', catCurves['Deep Work'], CATEGORY_META['Deep Work'].color) +
         makeHeatRow('Exercise & Walking Density (00–23h)', catCurves['Exercise'], CATEGORY_META['Exercise'].color);
 
       // 17. Habit Impact Analysis Table
@@ -2774,7 +2777,7 @@
       // 18. Percentile Reference Table
       const pctDefs = [
         { label: 'Sleep (hrs)', vals: perFigure.map(x => x.sleep) },
-        { label: 'Deep Work (hrs)', vals: perFigure.map(x => x.work) },
+        { label: 'Work Hours (hrs)', vals: perFigure.map(x => x.work) },
         { label: 'Longest Sprint (hrs)', vals: perFigure.filter(x => x.longestSprint > 0).map(x => x.longestSprint) },
         { label: 'Exercise (hrs)', vals: perFigure.map(x => x.exercise) },
         { label: 'Leisure (hrs)', vals: perFigure.map(x => x.leisure) },
@@ -3009,39 +3012,45 @@
       document.getElementById('stat-avg-work').textContent = `~${(totalWork / FIGURES.length).toFixed(1)}h`;
       document.getElementById('stat-avg-sleep').textContent = `~${(totalSleep / FIGURES.length).toFixed(1)}h`;
 
-      // Render live empirical findings on the homepage from the Time-Anchored subset
+      // Render live sample patterns on the homepage with n, medians, and ranges (guarding against outlier distortion)
       const anchored = FIGURES.filter(f => f.verificationTier === 'Time-Anchored').map(analyzeFigureMetrics);
-      const avgOf = (arr, k) => arr.length ? arr.reduce((a, b) => a + b[k], 0) / arr.length : 0;
-      const wrW = avgOf(anchored.filter(x => x.profession === 'Writers'), 'work');
-      const scW = avgOf(anchored.filter(x => x.profession === 'Science & Medicine'), 'work');
-      const owlW = avgOf(anchored.filter(x => x.chronotype === 'Night Owl'), 'work');
-      const earlyW = avgOf(anchored.filter(x => x.chronotype === 'Early Bird'), 'work');
-      const phEx = avgOf(anchored.filter(x => x.profession === 'Philosophers'), 'exercise');
-      const scEx = avgOf(anchored.filter(x => x.profession === 'Science & Medicine'), 'exercise');
+      const sumOf = (arr, k) => calcStats(arr.map(x => x[k]));
+      const wrArr = anchored.filter(x => x.profession === 'Writers');
+      const scArr = anchored.filter(x => x.profession === 'Science & Medicine');
+      const owlArr = anchored.filter(x => x.chronotype === 'Night Owl');
+      const earlyArr = anchored.filter(x => x.chronotype === 'Early Bird');
+      const phArr = anchored.filter(x => x.profession === 'Philosophers');
+
+      const wrSt = sumOf(wrArr, 'work');
+      const scSt = sumOf(scArr, 'work');
+      const owlSt = sumOf(owlArr, 'work');
+      const earlySt = sumOf(earlyArr, 'work');
+      const phExSt = sumOf(phArr, 'exercise');
+      const scExSt = sumOf(scArr, 'exercise');
 
       const findingsGrid = document.getElementById('homepage-findings-grid');
       if (findingsGrid) {
         findingsGrid.innerHTML = [
           {
-            eyebrow: '01 / The Prose Ceiling',
-            metric: `${wrW.toFixed(1)}h vs ${scW.toFixed(1)}h`,
-            text: `Time-anchored Writers average ${wrW.toFixed(1)}h of daily deep work—${(scW - wrW).toFixed(1)} hours less than Scientists (${scW.toFixed(1)}h)—despite nearly identical ~8h sleep.`,
+            eyebrow: '01 / Writers vs. Scientists',
+            metric: `med ${wrSt.median.toFixed(1)}h vs ${scSt.median.toFixed(1)}h`,
+            text: `In this sample, Writers (n=${wrArr.length}, med ${wrSt.median.toFixed(1)}h, range ${wrSt.min}–${wrSt.max}h) log shorter work blocks than Scientists (n=${scArr.length}, med ${scSt.median.toFixed(1)}h, range ${scSt.min}–${scSt.max}h)—likely reflecting solo drafting vs. broader lab and teaching hours.`,
           },
           {
-            eyebrow: '02 / The Night-Owl Paradox',
-            metric: `${owlW.toFixed(1)}h vs ${earlyW.toFixed(1)}h`,
-            text: `Contrary to 5 AM lore, Night Owls in the time-anchored set log ${(owlW - earlyW).toFixed(1)} more daily deep-work hours than Early Birds.`,
+            eyebrow: '02 / Early Birds vs. Night Owls',
+            metric: `med ${owlSt.median.toFixed(1)}h vs ${earlySt.median.toFixed(1)}h`,
+            text: `In this time-anchored subset, Night Owls (n=${owlArr.length}, med ${owlSt.median.toFixed(1)}h, range ${owlSt.min}–${owlSt.max}h) log longer work blocks than Early Birds (n=${earlyArr.length}, med ${earlySt.median.toFixed(1)}h, range ${earlySt.min}–${earlySt.max}h), though eccentric outliers skew the upper tail.`,
           },
           {
-            eyebrow: '03 / Peripatetic Philosophers',
-            metric: `${phEx.toFixed(1)}h / day`,
-            text: `Philosophers average the most daily walking and movement of any discipline (${phEx.toFixed(1)}h/day)—nearly double Scientists (${scEx.toFixed(1)}h).`,
+            eyebrow: '03 / Walking & Movement',
+            metric: `med ${phExSt.median.toFixed(1)}h / day`,
+            text: `Philosophers in this sample (n=${phArr.length}, med ${phExSt.median.toFixed(1)}h, range ${phExSt.min}–${phExSt.max}h) record more daily walking than Scientists (n=${scArr.length}, med ${scExSt.median.toFixed(1)}h), driven heavily by documented walkers like Kant, Nietzsche, and Thoreau.`,
           },
         ].map(f => `
           <div class="bg-pure p-5 space-y-1.5">
             <div class="flex items-baseline justify-between gap-2">
               <span class="font-mono text-[10px] uppercase tracking-[0.14em] text-subtle">${f.eyebrow}</span>
-              <span class="font-mono text-xs font-medium text-catWork">${f.metric}</span>
+              <span class="font-mono text-[11px] font-medium text-catWork">${f.metric}</span>
             </div>
             <p class="text-xs text-muted leading-relaxed">${f.text}</p>
           </div>
